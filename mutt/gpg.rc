@@ -1,0 +1,54 @@
+######################################################################
+# gpg configuration                                                  #
+######################################################################
+
+# this settings are common ones, found on the internet. they are
+# working properly, not figured out how already :)
+
+# WARNING: don't forget to change every occurence of my GPG key
+# ID. there is one in pgp_encrypt_only_command, another in
+# pgp_encrypt_sign_command and the final one, in pgp_sign_as.
+
+# receiving
+set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
+set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
+
+# sending
+set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command="/usr/lib/mutt/pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x83E6AE0D -- -r %r -- %f"
+set pgp_encrypt_sign_command="/usr/lib/mutt/pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x83E6AE0D -- -r %r -- %f"
+
+# misc
+set pgp_import_command="gpg --no-verbose --import -v %f"
+set pgp_export_command="gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command="gpg --no-verbose --batch --fingerprint --check-sigs %r"
+set pgp_list_pubring_command="gpg --no-verbose --batch --with-colons --list-keys %r"
+set pgp_list_secring_command="gpg --no-verbose --batch --with-colons --list-secret-keys %r"
+
+# pgp_autosign : tells mutt to sign mails by default, using the pgp_sign_as key.
+
+set pgp_autosign=yes
+
+# pgp_sign_as : the ID of the GPG key mutt will use to sign outgoing mails.
+
+set pgp_sign_as=0x83E6AE0D
+
+# pgp_replyencrypt : reply encrypted to encrypted messages.
+
+set pgp_replyencrypt=yes
+
+# pgp_timeout : the number of seconds mutt will remember your passphrase.
+
+set pgp_timeout=600
+
+# pgp_good_sign : text displayed by mutt in the PGP output block when
+# the signature has been succesfully checked.
+
+set pgp_good_sign="^gpg: Good signature from"
+
+# pgp_strict_enc : whether to convert signed messages to quoted-printable
+
+set pgp_strict_enc=no
+

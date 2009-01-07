@@ -1,0 +1,17 @@
+[user]
+	name = iff
+	email = iff@yvesineichen.com
+
+[core]
+      pager = less -FRSX
+      editor = vim
+
+[color]
+      ui = auto
+
+[merge]
+      tool = vimdiff
+
+[alias]
+      st = status
+      stat = status

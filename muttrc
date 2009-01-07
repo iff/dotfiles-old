@@ -1,0 +1,373 @@
+######################################################################
+# sam's muttrc                                                       #
+######################################################################
+
+######################################################################
+# mail source                                                        #
+######################################################################
+
+# folder : specify the mail location, for example ~/Mail. when using
+# IMAP, you must set it to your server URI : imap[s]://[user@]host/
+
+# Base hook to reset account variables to known state before activating new ones
+account-hook . 'unset preconnect imap_user imap_pass imap_authenticators; set ssl_starttls=ask-yes'
+
+account-hook imaps://mail.yvesineichen.com/ 'set imap_user=iff@yvesineichen.com imap_pass='
+folder-hook imaps://mail.yvesineichen.com/ 'set folder=imaps://mail.yvesineichen.com/INBOX record=+Sent from="Yves Ineichen <iff@yvesineichen.com>"'
+
+account-hook imaps://mail.ethz.ch/ 'set imap_user=iyves imap_pass='
+folder-hook imaps://mail.ethz.ch/ 'set folder=imaps://mail.ethz.ch record=+Sent from="Yves Ineichen <iyves@student.ethz.ch>"'
+
+account-hook imaps://mail.psi.ch/ 'set imap_user=ineichen imap_pass='
+folder-hook imaps://mail.psi.ch/ 'set folder=imaps://mail.psi.ch record=+Sent from="Yves Ineichen <yves.ineichen@psi.ch>"'
+
+set folder=imaps://mail.ethz.ch
+mailboxes "=INBOX"
+
+set folder=imaps://mail.yvesineichen.com
+mailboxes "=INBOX"
+
+set folder=imaps://mail.psi.ch
+mailboxes "=INBOX"
+
+set sendmail="/usr/bin/msmtp -a yvesineichen"
+
+send2-hook . 'set sendmail="/usr/bin/msmtp -a dplanet"'
+send2-hook '~f @student.ethz.ch' 'set sendmail="/usr/bin/msmtp -a ethz"'
+send2-hook '~f @psi.ch' 'set sendmail="/usr/bin/msmtp -a ethz"'
+send2-hook '~f @yvesineichen.com' 'set sendmail="/usr/bin/msmtp -a yvesineichen"'
+
+
+#set folder="imaps://sam@imap.bulix.org/"
+#set folder="~/Maildir"
+
+# ssl_starttls : tells mutt to use TLS whenever possible. TLS is the
+# OpenSSL implementation on a Debian system, so I must set this in
+# order to use SSL
+
+set ssl_starttls=yes
+
+# imap_authenticators : specify the authentication methods used on the
+# IMAP server. this is a list of colon (':') separated method. they
+# are tried in the order you specify them here, until one works. in a
+# standard IMAP configuration, the IMAP server uses system accounts
+# (method 'login')
+
+set imap_authenticators="login"
+
+# ssl_force_tls : tells mutt to always use SSL when connecting to the
+# IMAP server. in my imaps:// setup, this is necessary.
+
+set ssl_force_tls=yes
+
+# mail_check : mail check interval. mutt will check for new mail in
+# all defined mailboxes (see mailboxes files for more information).
+
+set mail_check=30
+
+# timeout : number of seconds mutt will wait for a key to be pressed
+# before timing out and check for new mail.
+
+set timeout=5
+
+# record : tells mutt to backup all outgoing mail in a folder. you'll
+# have here to specify the folder format : '=' is for Maildir.
+
+set record="=Sent"
+
+# postponed : specify the postponed mails (drafts) folder.
+
+set postponed="=Drafts"
+
+unset imap_passive
+
+######################################################################
+# include some additionnal configuration snippets                    #
+######################################################################
+
+source ~/.mutt/colors.rc          # colors definitions
+#source ~/.mutt/mime.rc            # s/mime behavior
+#source ~/.mutt/gpg.rc             # gpg support
+#source ~/.mutt/aliases.rc         # aliases (kind of address book)
+#source ~/.mutt/auto_views.rc      # auto views
+#source ~/.mutt/lists.rc           # mailing lists
+
+# NOTE: you must include your mailboxes list *after* setting the
+# folder variable, otherwise mutt won't understand where the mailboxes
+# refers to.
+
+#source ~/.mutt/mailboxes.rc
+
+######################################################################
+# host and system                                                    #
+######################################################################
+
+# hostname : the hostname is appended after the @ in local email
+# addresses.
+
+#set hostname=bulix.org
+
+# hidden_host : tells mutt not add the hostname when adding the domain
+# part to addresses. this avoids having emails like
+# 'user@host.domain'. it's sometimes better to have 'user@domain'.
+
+#set hidden_host
+
+# use_domain : when set, mutt will append the domain name to local
+# addresses, so 'To: user' becomes 'To: user@domain'.
+
+#set use_domain
+
+# header_cache : tells mutt where to store the email headers
+# cache. this feature was originaly a patch, but it is included in the
+# mutt debian binary package (patch: mutt-cvs-header-cache.21). this
+# is a very useful feature since mutt doesn't have to fetch all
+# messages headers when entering a folder.
+
+set header_cache=/home/asmdel/.mutt_cache/
+
+
+# nomove : when set, mutt keeps user mail is $MAIL
+# (/var/mail/user). this is a personnal choice.
+
+#set nomove
+
+######################################################################
+# personnal information                                              #
+######################################################################
+
+# realname : set it if you need to override the GECOS field. if you
+# don't set the from variable, the realname will be used instead.
+
+set realname="Yves Ineichen"
+
+# alternates : tells mutt what your email addresses are, using a
+# regexp. mutt uses this to avoid including yourself in a 'reply to
+# all'.
+
+set reverse_name  
+set from=iff@yvesineichen.com
+alternates "iyves@student\.ethz\.ch|yves\.ineichen@psi\.ch"
+
+# signature : if set, mutt will add the traditionnal signature
+# separator '-- ', followed by the contents of the given file. if the
+# filename ends with a pipe, mutt assumes that the string given is a
+# shell commande, and execute it. for example :
+# set signature="/usr/bin/fortune |"
+
+set signature=~/.signature
+
+# alias_file : specify the mutt aliases file. this is used when
+# creating an alias, contratry to the 'source ...' at the begining of
+# the file, that tells mutt to load the aliases.
+
+set alias_file=~/.mutt/aliases.rc
+
+######################################################################
+# mutt behavior                                                      #
+######################################################################
+
+# sort : specify primary sorting order. can be one of : date, from,
+# date-received, subject, to, threads, mailbox-order, size, score,
+# spam. you can change sort order on the fly in mutt's message listing
+# window with 'o'. you may prefix this value with 'reverse-' to
+# reverse the sorting order (as in 'reverse-date-received')
+
+folder-hook . set sort=threads
+
+# sort_aux : set the auxiliary sorting order. this value is only used
+# when primary sorting by threads. it defines the sub-sorting order or
+# the thread. 'date-received' is generaly a good
+# idea. 'last-date-received' makes a thread which has just received a
+# mail the last one (or first one, depending on your 'reverse-'
+# setting) displayed by mutt.
+
+set sort_aux=last-date-received
+
+# sort sent messages by date, using a folder-hook (in order to set the
+# rule only for a specified folder)
+
+folder-hook "=Sent" set sort=date-received
+
+# sort messages by date sent in inbox because we don't really care
+# about threads, and it is generally easier to understand.
+
+#folder-hook "=INBOX" set sort=date-sent
+#folder-hook "=inbox" set sort=date-sent
+
+# delete : require delete confirmation (for example when syncing
+# mailbox or leaving the folder).
+
+set delete=yes
+
+#editor
+set editor="vim '+/^$'"
+
+# nomark_old : don't mark unread messages as old when leaving the
+# folder or exiting mutt.
+
+set nomark_old
+
+# reverse_alias : if known in the alias database, display sender name
+# instead of email.
+
+set reverse_alias
+
+# strict_threads : tells mutt to determine threading relations
+# strictly.  mutt will only use the 'In-Reply-To' and 'References'
+# headers instead of using 'Subject'. this avoids grouping unrelated
+# messages with same subject.
+
+set strict_threads
+
+# [no]pipe_decode : tells mutt [not] to process messages while piping them.
+
+set nopipe_decode
+
+# mailcap_path : where to find mailcap definitions.
+# mailcap_sanitize : avoids weird characters to be expanded in
+# mailcap % expressions
+
+#set mailcap_path=~/.mutt/mailcap.rc:/etc/mailcap
+#set mailcap_sanitize=yes
+
+# some key macros
+
+macro index d "s=Trash" "move message to trash"
+macro pager d "s=Trash" "move message to trash"
+
+#macro index X "s=spam" "file as Spam"
+#macro pager X "s=spam" "file as Spam"
+
+macro index ~ "c=INBOX<enter>" "go to Inbox"
+macro pager ~ "c=INBOX<enter>" "go to Inbox"
+
+macro index <f2>  "c imaps://mail.ethz.ch \n"
+macro index <f3>  "c imaps://mail.yvesineichen.com/INBOX \n"
+
+macro index,pager y <sync-mailbox><change-folder>?<toggle-mailboxes>
+
+macro index   q '<change-folder>?<toggle-mailboxes>'
+macro browser q '<exit><quit>'
+
+# confirmappend : don't require confirmation when appending a mail to
+# another directory (when copying for example)
+
+set confirmappend=no
+
+# followup_to : add a Mail-Followup-To header to mails when sending to
+# a subscribed mailing list (see ~/.mutt/lists.rc)
+
+set followup_to=yes
+
+# index_format
+
+set index_format="%4C %Z %{%b %d} %-15.15F (%4l) %s"
+
+######################################################################
+# pager (mail viewer)                                                #
+######################################################################
+
+# pager_stop : tells pager (mutt's builtin mail viewer) not to switch
+# to next message when at the bottom of a mail. if you want to switch
+# message, use the array keys (<left> and <right>). the <tab> key will
+# jump to the next unread message.
+
+set pager_stop
+
+# pager_index_lines : set the number of lines of index context to
+# display when in pager
+
+set pager_index_lines=9
+
+# pager_context : set the pager context, i.e. the number of lines that
+# should be displayed from the previous page when reading a mail.
+
+set pager_context=3
+
+# displayed headers : as in firewall configuration, we first ignore
+# all headers. then, we unignore headers we want to be displayed.
+
+ignore *
+unignore From From: To Cc Subject Date Reply-To X-Mailer User-Agent Bcc
+
+# header order
+
+unhdr_order
+hdr_order From: To: Cc: Subject: Reply-To: Date:
+
+# quote_regexp : what we consider to be a quote. this regexp manages
+# up to 4 ('{0,4}') levels of quoting, using different quoting
+# characters (> | : %), including some alphanumeric characters (as
+# in 'sam> blabla').
+
+set quote_regexp="^( {0,4}[>|:%]| {0,4}[a-z0-9]+[>|]+)+"
+
+# alternative_order : specify the order mutt should follow when trying
+# to determine which mime multipart attachment to display. wildcards
+# can be used (as in 'image/*')
+
+alternative_order text/enriched text/plain text/html
+
+# charset : the charset used to display and read data from terminal
+
+set charset="iso-8859-1"
+
+# send_charset : a list of charsets used to send mails (in order of
+# preference)
+
+#set send_charset="iso-8859-1:iso-8859-15:us-ascii:utf8"
+
+######################################################################
+# mail composition                                                   #
+######################################################################
+
+# include : tells mutt to include message in replies. as always,
+# message lines are prefixed with a '>'
+
+set include
+
+# edit_headers : always edit message headers. this allows us to add
+# Cc: or change subject directly while editing mail.
+
+set edit_headers
+
+# write_bcc : (unset) don't remove the Bcc: header contents.
+
+unset write_bcc
+
+# attribution : this is the string that will precede the message you
+# are replying to (when including message, as we do).
+# %n: sender name
+# %a: sender email
+# %Y-%m-%d: date in YYYY-mm-dd format
+# %H:%M:%S: time in HH:MM:SS format
+# %{...}: converts date and time information to our timezone.
+
+set attribution="* %n <%a> [%{%Y-%m-%d %H:%M:%S}]:\n"
+
+# mime_forward : tells mutt to forward messages as MIME attachments.
+
+set mime_forward
+
+# defaults headers ('folder-hook .' applies to all folders)
+
+#folder-hook . my_hdr From: maxime.petazzoni@bulix.org
+#folder-hook . my_hdr Reply-To: maxime.petazzoni@bulix.org
+
+# use my university's email address when in it's mail folder
+
+#folder-hook "=utbm" my_hdr From: maxime.petazzoni@utbm.fr
+#folder-hook "=utbm" my_hdr Reply-To: maxime.petazzoni@utbm.fr
+
+# allow_8bit : use 8bit instead of quoted-printable encoding for sending
+# mails
+
+#set allow_8bit=yes
+unset allow_8bit
+
+######################################################################
+# last, but not least, get mutt to display its version on startup   #
+######################################################################
+
+push <show-version>
