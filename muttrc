@@ -13,13 +13,13 @@
 account-hook . 'unset preconnect imap_user imap_pass imap_authenticators; set ssl_starttls=ask-yes'
 
 account-hook imaps://mail.yvesineichen.com/ 'set imap_user=iff@yvesineichen.com imap_pass='
-folder-hook imaps://mail.yvesineichen.com/ 'set folder=imaps://mail.yvesineichen.com/INBOX record=+Sent from="Yves Ineichen <iff@yvesineichen.com>"'
+folder-hook imaps://mail.yvesineichen.com/ 'set folder=imaps://mail.yvesineichen.com/INBOX record=+Sent from="Yves Ineichen <iff@yvesineichen.com>" signature=".signature"'
 
 account-hook imaps://mail.ethz.ch/ 'set imap_user=iyves imap_pass='
-folder-hook imaps://mail.ethz.ch/ 'set folder=imaps://mail.ethz.ch record=+Sent from="Yves Ineichen <iyves@student.ethz.ch>"'
+folder-hook imaps://mail.ethz.ch/ 'set folder=imaps://mail.ethz.ch record=+Sent from="Yves Ineichen <iyves@student.ethz.ch>" signature=".signature"'
 
 account-hook imaps://mail.psi.ch/ 'set imap_user=ineichen imap_pass='
-folder-hook imaps://mail.psi.ch/ 'set folder=imaps://mail.psi.ch record=+Sent from="Yves Ineichen <yves.ineichen@psi.ch>"'
+folder-hook imaps://mail.psi.ch/ 'set folder=imaps://mail.psi.ch record=+Sent from="Yves Ineichen <yves.ineichen@psi.ch>" signature=".signature_psi"'
 
 set folder=imaps://mail.ethz.ch
 mailboxes "=INBOX"
