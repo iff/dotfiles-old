@@ -1,6 +1,7 @@
 http://kate.ka.funpic.de/wp-rss2.php "personal"
 http://tirania.org/blog/miguel.rss2 "personal"
 http://www.kroah.com/log/index.rss "personal"
+http://www.serpentine.com/blog/feed/
 http://hexblog.com/index.xml "personal"
 http://blog.rlove.org/feeds/posts/default?alt=rss "personal"
 http://feeds.feedburner.com/HelloToYou "personal"
@@ -21,6 +22,8 @@ http://lambda-the-ultimate.org/rss.xml "news"
 http://rss.slashdot.org/Slashdot/slashdotDevelopers "news"
 http://blogs.intel.com/research/index.xml "news"
 http://planet.haskell.org/rss20.xml "news"
+http://www.realworldhaskell.org/blog/feed/
+http://ghcmutterings.wordpress.com/?feed=rss2
 http://arxivblog.com/?feed=rss2
 http://feeds.aps.org/rss/recent/prstab.xml
 http://feeds.feedburner.com/MagnumPhotos?format=xml "news"
