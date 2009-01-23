@@ -6,6 +6,7 @@ http://hexblog.com/index.xml "personal"
 http://blog.rlove.org/feeds/posts/default?alt=rss "personal"
 http://feeds.feedburner.com/HelloToYou "personal"
 http://78.46.209.101/chyrp/feed/
+http://acidradish.wordpress.com/feed/
 http://www.apadventures.net/?feed=rss2
 http://www.ninacaprez.ch/blog/?feed=rss2
 http://feeds.feedburner.com/writequit/feed
@@ -33,3 +34,4 @@ http://feeds.feedburner.com/codinghorror "news"
 http://thedailywtf.com/rss.aspx "fun"
 http://xkcd.com/rss.xml "fun"
 http://www.phdcomics.com/gradfeed_justcomics.php "fun"
+http://github.com/feeds/dakrone/commits/dakrone-dotfiles/master
