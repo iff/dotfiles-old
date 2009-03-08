@@ -8,10 +8,12 @@ http://feeds.feedburner.com/HelloToYou "personal"
 http://78.46.209.101/chyrp/feed/
 http://acidradish.wordpress.com/feed/
 http://www.apadventures.net/?feed=rss2
+http://www.8a.nu/rss/Main.aspx?CountryCode=GLOBAL
 http://www.ninacaprez.ch/blog/?feed=rss2
 http://feeds.feedburner.com/writequit/feed
 http://feeds.feedburner.com/LinuxHatersBlog?format=xml "personal"
 http://augustss.blogspot.com/rss.xml "personal"
+http://torvalds-family.blogspot.com/rss.xml
 http://photoblog.marcschneider.org/index.php?x=rss "galleries"
 http://www.flashflavor.com/blog/rss "galleries"
 http://www.thefstopmag.com/wp-rss2.php "galleries"
@@ -26,6 +28,7 @@ http://planet.haskell.org/rss20.xml "news"
 http://www.realworldhaskell.org/blog/feed/
 http://ghcmutterings.wordpress.com/?feed=rss2
 http://arxivblog.com/?feed=rss2
+http://feeds.feedburner.com/texample/weblog
 http://feeds.aps.org/rss/recent/prstab.xml
 http://feeds.feedburner.com/MagnumPhotos?format=xml "news"
 http://neworder.box.sk/rss/sms.xml "news"
