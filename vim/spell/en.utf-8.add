@@ -1,2 +1,8 @@
 writequit
 end
+preconditioner
+AMG
+FFT
+wakefeld
+wakefield
+wakefield
