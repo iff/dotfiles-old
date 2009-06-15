@@ -7,19 +7,16 @@ http://blog.rlove.org/feeds/posts/default?alt=rss "personal"
 http://all-thing.net/index.rss
 http://feeds.feedburner.com/HelloToYou "personal"
 http://caurea.org/feed/
-http://acidradish.wordpress.com/feed/
 http://www.apadventures.net/?feed=rss2
 http://feeds2.feedburner.com/scientist-home
 http://www.8a.nu/rss/Main.aspx?CountryCode=GLOBAL
 http://www.ninacaprez.ch/blog/?feed=rss2
 http://feeds.feedburner.com/writequit/feed
-http://feeds.feedburner.com/LinuxHatersBlog?format=xml "personal"
 http://augustss.blogspot.com/rss.xml "personal"
 http://torvalds-family.blogspot.com/rss.xml
 http://photoblog.marcschneider.org/index.php?x=rss "galleries"
 http://www.flashflavor.com/blog/rss "galleries"
 http://www.thefstopmag.com/wp-rss2.php "galleries"
-http://strobist.blogspot.com/feeds/posts/default "galleries"
 http://kemplemedia.com/blog/?feed=rss2
 http://kerneltrap.org/node/feed "news"
 http://lwn.net/headlines/newrss "news"
@@ -27,13 +24,10 @@ http://lambda-the-ultimate.org/rss.xml "news"
 http://rss.slashdot.org/Slashdot/slashdotDevelopers "news"
 http://blogs.intel.com/research/index.xml "news"
 http://planet.haskell.org/rss20.xml "news"
-http://www.realworldhaskell.org/blog/feed/
 http://ghcmutterings.wordpress.com/?feed=rss2
 http://arxivblog.com/?feed=rss2
 http://feeds.feedburner.com/texample/weblog
-http://feeds.aps.org/rss/recent/prstab.xml
-http://feeds.feedburner.com/MagnumPhotos?format=xml "news"
-http://neworder.box.sk/rss/sms.xml "news"
+http://neworder.box.sk/rss/sms.xml "sms"
 http://neworder.box.sk/rss/news.xml "news"
 http://feeds.feedburner.com/codinghorror "news"
 http://thedailywtf.com/rss.aspx "fun"
