@@ -12,8 +12,8 @@ reload-time 20
 bind-key j down
 bind-key k up
 
-color background   white   black
-color listnormal   white   black
-color listfocus    white   red     bold
-color info         white   red     bold
-color article      white   black
+#color background   white   black
+#color listnormal   white   black
+#color listfocus    white   red     bold
+#color info         white   red     bold
+#color article      white   black
