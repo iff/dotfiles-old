@@ -1,16 +1,16 @@
 [user]
-	name = Yves Ineichen
-	email = yves.ineichen@psi.ch
+	name = iff
+    email = iff@yvesineichen.com
 
 [core]
-      pager = less -FRSX
-      editor = vim
+    pager = less -FRSX
+    editor = vim
 
 [color]
-      ui = true
+    ui = true
 
 [merge]
-      tool = vimdiff
+    tool = vimdiff
 
 [alias]
     st = status
