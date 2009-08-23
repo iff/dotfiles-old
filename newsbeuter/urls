@@ -22,6 +22,8 @@ http://kerneltrap.org/node/feed "news"
 http://lwn.net/headlines/newrss "news"
 http://lambda-the-ultimate.org/rss.xml "news"
 http://rss.slashdot.org/Slashdot/slashdotDevelopers "news"
+http://feeds.wired.com/wired/index
+http://www.engadget.com/rss.xml
 http://blogs.intel.com/research/index.xml "news"
 http://planet.haskell.org/rss20.xml "news"
 http://ghcmutterings.wordpress.com/?feed=rss2
@@ -35,3 +37,4 @@ http://xkcd.com/rss.xml "fun"
 http://www.phdcomics.com/gradfeed_justcomics.php "fun"
 http://github.com/feeds/dakrone/commits/dakrone-dotfiles/master
 http://images.apple.com/trailers/home/rss/newtrailers.rss
+http://www.ibelieveinadv.com/feed/
