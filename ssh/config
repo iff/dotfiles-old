@@ -1,8 +1,8 @@
 Host *
-      identityfile ~/.ssh/id_rsa
+      identityfile ~/.ssh/id_dsa
 
 Host github.com
-      identityfile ~/.ssh/github_rsa
+      identityfile ~/.ssh/github_dsa
 
 Host psi.ch
       ForwardAgent yes
