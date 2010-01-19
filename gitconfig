@@ -12,6 +12,12 @@
 [merge]
     tool = vimdiff
 
+[diff]
+    external = git_vimdiff_wrapper
+
+[pager]
+    diff = 
+
 [alias]
     st = status
     stat = status
