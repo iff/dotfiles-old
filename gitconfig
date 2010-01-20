@@ -38,6 +38,8 @@
     l   = log   -C --decorate
     ls  = log   -C --stat --decorate
     lsp = log   -C --stat -p --decorate
+    
+    lc = log ORIG_HEAD.. --stat --no-merges
 
     lg  = log   --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s'
     lga = log   --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all
@@ -71,6 +73,8 @@
 
     edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
     add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+
+    locate = !sh -c 'git ls-files "\\*$1"' -
 
 [rerere]
     enabled = 1
