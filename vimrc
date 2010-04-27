@@ -168,7 +168,7 @@ if has('statusline')
                         "\"#%n %l/%L,%c%V "              .
                         "\""
                  "      \"%#StatusLineNC#%{GitBranchInfoString()}%* " .
-              let &stl="%F%m%r%h%w\ [%{&ff}]\ [%Y]\ %P\ %=[a=\%03.3b]\ [h=\%02.2B]\ [%l,%v]"
+              let &stl="%F%m%r%h%w\ [%{&ff}]\ [%Y]\ %P\ %=%{fugitive#statusline()}\ [a=\%03.3b]\ [h=\%02.2B]\ [%l,%v]"
         endfunc
         " Not using it at the moment, using a different one
         call SetStatusLineStyle()
