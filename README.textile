@@ -1,0 +1,18 @@
+h2. dot-files
+
+This is a modest collection of my dotfiles for
+
+    * git
+    * mutt 
+    * newsbeuter  
+    * screen
+    * signatures
+    * ssh  
+    * sup  
+    * vim
+
+h3. Installation
+
+Clone the repository and link the files into home...
+
+
