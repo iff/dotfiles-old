@@ -98,10 +98,6 @@ let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
 
-" Settings for VimClojure
-let g:clj_highlight_builtins=1      " Highlight Clojure's builtins
-let g:clj_paren_rainbow=1           " Rainbow parentheses'!
-
 " Settings for yankring
 let g:yankring_histotry_dir="~/.vim/"
 let g:yankring_histotry_file="~/.vim/yank.txt"
@@ -172,7 +168,7 @@ if has('statusline')
                         "\"#%n %l/%L,%c%V "              .
                         "\""
                  "      \"%#StatusLineNC#%{GitBranchInfoString()}%* " .
-              let &stl="%F%m%r%h%w\ [%{&ff}]\ [%Y]\ %P\ %=[a=\%03.3b]\ [h=\%02.2B]\ [%l,%v]"
+              let &stl="%F%m%r%h%w\ [%{&ff}]\ [%Y]\ %P\ %=%{fugitive#statusline()}\ [a=\%03.3b]\ [h=\%02.2B]\ [%l,%v]"
         endfunc
         " Not using it at the moment, using a different one
         call SetStatusLineStyle()
