@@ -122,15 +122,18 @@ ps_scm_f() {
                 b=$(git symbolic-ref HEAD 2>/dev/null )
             fi
 
-            if git status | grep -q '^# Changed but not updated:' ; then
+            #update-index is needed by diff-files
+            git update-index --ignore-submodules --refresh > /dev/null;
+            
+            if git diff-files --name-status -r --ignore-submodules > /dev/null ; then
                 a="${a}*"
             fi
 
-            if git status | grep -q '^# Changes to be committed:' ; then
+            if ! git diff-index --cached --name-status -r --ignore-submodules HEAD > /dev/null ; then
                 a="${a}+"
             fi
 
-            if git status | grep -q '^# Untracked files:' ; then
+            if git ls-files --exclude-standard --others > /dev/null ; then
                 a="${a}?"
             fi
 
