@@ -1,0 +1,160 @@
+#git vimdiff
+function git_diff() {
+    git diff --no-ext-diff -w "$@" | vim -R -
+}
+
+__git_branch () {
+    local b
+
+    if ! b="$(git symbolic-ref HEAD 2>/dev/null)"; then
+        if ! b="$(git describe --exact-match HEAD 2>/dev/null)"; then
+            b="$(git rev-parse 2>/dev/null | cut -c1-7)..."
+        fi
+    fi
+
+    echo "$b"
+}
+
+__git_dirty () {
+    [[ -n "$(git diff-index --name-only HEAD --)" ]] && return 0
+}
+
+__git_cstat () {
+    local r="$(git config --get branch.$1.remote)"
+    local m="$(git config --get branch.$1.merge)"
+
+    m=${m#refs/heads}
+
+    [[ -z "$r" || -z "$m" ]] && return
+
+    local l="$(git rev-list --left-right "$1...$r$m" | cut -c1 | sort | uniq -c)"
+
+    local n="$(echo "$l" | grep "<" | sed -re 's/[^0-9]*([0-9]+).*/\1/')"
+    if [ -n "$n" ]; then
+        printf -- "\[\033[01;35m\]+$n"
+    fi
+
+    local n="$(echo "$l" | grep ">" | sed -re 's/[^0-9]*([0-9]+).*/\1/')"
+    if [ -n "$n" ]; then
+        printf -- "\[\033[01;31m\]-$n"
+    fi
+}
+
+#__git_prompt () {
+    #local g b c n
+
+    #g="$(git rev-parse --git-dir 2>/dev/null)"
+    #if [ -z "$g" ]; then
+        #printf "\[\033[01;34m\]\W"
+        #return
+    #fi
+
+    #if [ "$g" = ".git" ]; then
+        #g="$PWD/$g"
+    #fi
+
+    #b="$(__git_branch)"
+    #b="${b##refs/heads/}"
+
+    #if __git_dirty; then
+        #c="\[\033[01;31m\]"
+    #else
+        #c="\[\033[01;32m\]"
+    #fi
+
+    #n="$(__git_cstat "$b")"
+
+    #g="${g%/.git}"
+    #printf "\[\033[01;34m\]%s $c(%s)%s\[\033[01;34m\] - %s" "${g##*/}" "$b" "$n" "${PWD##$g}/"
+#}
+
+#__git_prompt_command() {
+    #PS1="$(printf "\[\033[01;0m\][ \[\033[00;32m\]\h\[\033[01;0m\] ] $(__git_prompt) \$\[\033[01;0m\] ")"
+#}
+
+#PS1="\[\033[01;0m\][ \[\033[00;32m\]\h\[\033[01;0m\] ] \[\033[01;34m\]\W \$\[\033[01;0m\] "
+#PROMPT_COMMAND=__git_prompt_command
+
+# <<< END TOMC
+
+#git colors
+# <<< completion 
+#. /usr/share/bash-completion/git 
+
+#PS1="\[\033[01;31m\][\${PWD##*/}]\$(__git_ps1_color)\$(__git_ps1) \$\[\033[00m\] "
+
+ps_scm_f() {
+    local color="\[\033[01;31m\]"
+    local s=
+    if [[ -d ".svn" ]] ; then
+        local r=$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )
+        local status=$(svn status | grep -q -v '^?' && echo -n "*" )
+        s="r$r$status"
+        if [ -z "$status" ] ; then
+            color="\[\033[01;32m\]" #string is null -> green
+        fi
+    else
+        local d=$(git rev-parse --git-dir 2>/dev/null ) b= r= a=
+        if [[ -n "${d}" ]] ; then
+            if [[ -d "${d}/../.dotest" ]] ; then
+                if [[ -f "${d}/../.dotest/rebase" ]] ; then
+                    r="rebase"
+                elif [[ -f "${d}/../.dotest/applying" ]] ; then
+                    r="am"
+                else
+                    r="???"
+                fi
+                b=$(git symbolic-ref HEAD 2>/dev/null )
+            elif [[ -f "${d}/.dotest-merge/interactive" ]] ; then
+                r="rebase-i"
+                b=$(<${d}/.dotest-merge/head-name)
+            elif [[ -d "${d}/../.dotest-merge" ]] ; then
+                r="rebase-m"
+                b=$(<${d}/.dotest-merge/head-name)
+            elif [[ -f "${d}/MERGE_HEAD" ]] ; then
+                r="merge"
+                b=$(git symbolic-ref HEAD 2>/dev/null )
+            elif [[ -f "${d}/BISECT_LOG" ]] ; then
+                r="bisect"
+                b=$(git symbolic-ref HEAD 2>/dev/null )"???"
+            else
+                r=""
+                b=$(git symbolic-ref HEAD 2>/dev/null )
+            fi
+
+            if git status | grep -q '^# Changed but not updated:' ; then
+                a="${a}*"
+            fi
+
+            if git status | grep -q '^# Changes to be committed:' ; then
+                a="${a}+"
+            fi
+
+            if git status | grep -q '^# Untracked files:' ; then
+                a="${a}?"
+            fi
+
+            b=${b#refs/heads/}
+            b=${b// }
+            [[ -n "${r}${b}${a}" ]] && s="${r:+${r}:}${b}${a:+ ${a}}"
+
+
+            if test -z "$(git diff-index --name-only HEAD --)"; then
+                color="\[\033[01;32m\]" 
+            fi
+        fi
+    fi
+    s="${s}${ACTIVE_COMPILER}"
+    s="${s:+${s}}"
+    printf "$color"
+    echo -n "$s"
+}
+
+
+#PS1="\[\033[01;31m\][\${PWD##*/}] \$(__git_ps1_color)\$(ps_scm_f)\$\[\033[00m\] "
+__git_prompt_command() {
+    #PS1="\[\033[01;31m\][\${PWD##*/}] $(ps_scm_f)\$\[\033[00m\] "
+    PS1="\n\[\e[30;1m\]┌─(\[\e[34;1m\]\u@\h\[\e[30;1m\])-(\[\[\e[34;1m\]\w\[\e[30;1m\])-($(ps_scm_f)\[\e[30;1m\])\n\[\e[30;1m\]└─╼ \[\e[0m\]"
+}
+PS1="\w\$"
+PROMPT_COMMAND=__git_prompt_command
