@@ -1,0 +1,13 @@
+# <<< aliases
+alias +='pushd .'
+alias -- -='popd'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias cd..='cd ..'
+alias dir='ls -l'
+alias l='ls -alF'
+alias la='ls -la'
+alias ll='ls -l'
+alias ls-l='ls -l'
+alias md='mkdir -p'
+alias ack='ack-grep'
