@@ -16,7 +16,7 @@ h3. Installation
 
 Clone the repository and link the files into home.. For bash configurations use:
 
-    for m in alias prompt sprunge keychain; do
-        . "~/shared-dotfiles/bash/$m"
-    done
+bc.. for m in alias prompt sprunge keychain; do
+    . "~/shared-dotfiles/bash/$m"
+done
 
