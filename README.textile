@@ -2,6 +2,7 @@ h2. dot-files
 
 This is a modest collection of my dotfiles for
 
+    * bash
     * git
     * mutt 
     * newsbeuter  
@@ -13,6 +14,9 @@ This is a modest collection of my dotfiles for
 
 h3. Installation
 
-Clone the repository and link the files into home...
+Clone the repository and link the files into home.. For bash configurations use:
 
+    for m in alias prompt sprunge keychain; do
+        . "~/shared-dotfiles/bash/$m"
+    done
 
