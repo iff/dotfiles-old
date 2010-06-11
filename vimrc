@@ -106,7 +106,7 @@ let use_xhtml=1
 
 " Settings for yankring
 let g:yankring_history_dir="~/.vim/"
-let g:yankring_history_file="~/.vim/yank.txt"
+let g:yankring_history_file="yank.txt"
 
 " Settings for twitvim
 let twitvim_login=''                " Requires using ,ts to input your username/password
