@@ -13,7 +13,7 @@ set ruler                     " show the line number on the bar
 set more                      " use more prompt
 set autoread                  " watch for file changes
 set number                    " line numbers
-set hidden                    " allow edit buffers to be hidden
+set nohidden                  " close the buffer when I close a tab (I use tabs more than buffers)
 set noautowrite               " don't automagically write on :next
 set lazyredraw                " don't redraw when don't have to
 set showmode
@@ -61,16 +61,28 @@ if !has("gui_running")
       " colors:
       " (http://www.culater.net/software/TerminalColors/TerminalColors.php)
       " to change the really hard-to-read dark blue into a lighter shade.
-      colorscheme ir_black_new " only when I can change certain colors
+      "colorscheme ir_black_new "
+      "colorscheme rdark
+      colorscheme Mustang
 end
 if has("gui_running")
-      "colorscheme macvim      " macvim == win
-      colorscheme ir_black_new     " only when I can change certain colors
-      set noantialias          " If I use ir_black_new, no antialiasing
-      set guioptions-=T        " no toolbar
-      set lines=65
-      set columns=140
-      "set gfn=Monaco:h9
+    "colorscheme macvim         " macvim == win
+    "colorscheme ir_black_new   " only when I can change certain colors
+    colorscheme rdark
+    let rdark_current_line=1  " highlight current line
+    set background=dark
+    set noantialias
+    set guioptions-=T        " no toolbar
+    set guioptions-=m        " no menubar
+    set guioptions-=l        " no left scrollbar
+    set guioptions-=L        " no left scrollbar
+    set guioptions-=r        " no right scrollbar
+    set guioptions-=R        " no right scrollbar
+    set lines=64
+    set columns=135
+    set transparency=0
+    set gfn=Monaco:h9.0
+    set clipboard=unnamed
 end
 
 if exists('&t_SI')
@@ -78,12 +90,6 @@ if exists('&t_SI')
       let &t_EI = "\<Esc>]12;grey80\x7"
 endif
       
-" fish fixes
-if $SHELL =~ 'bin/fish'
-      set shell=/usr/bin/zsh
-endif
-
-
 " Settings for taglist.vim
 let Tlist_Use_Right_Window=1
 let Tlist_Auto_Open=0
@@ -99,8 +105,8 @@ let html_use_css=1
 let use_xhtml=1
 
 " Settings for yankring
-let g:yankring_histotry_dir="~/.vim/"
-let g:yankring_histotry_file="~/.vim/yank.txt"
+let g:yankring_history_dir="~/.vim/"
+let g:yankring_history_file="~/.vim/yank.txt"
 
 " Settings for twitvim
 let twitvim_login=''                " Requires using ,ts to input your username/password
