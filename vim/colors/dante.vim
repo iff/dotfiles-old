@@ -41,6 +41,16 @@ hi StatusLineNC	term=reverse cterm=reverse gui=reverse guifg=gray40
 hi VertSplit	term=reverse cterm=reverse gui=bold,reverse guifg=gray40
 hi Title	term=bold ctermfg=magenta gui=bold guifg=aquamarine
 
+" additions by Lee
+hi SpellBad     guifg=NONE          guibg=NONE          gui=undercurl
+            \   ctermfg=white       ctermbg=darkred     guisp=#ff0011
+hi SpellCap     guifg=NONE          guibg=NONE          gui=undercurl
+            \   ctermfg=white       ctermbg=darkblue    guisp=#0044ff
+hi SpellLocal   guifg=NONE          guibg=NONE          gui=undercurl
+            \   ctermfg=black       ctermbg=cyan        guisp=#00dd99   
+hi SpellRare    guifg=NONE          guibg=NONE          gui=undercurl
+            \   ctermfg=white       ctermbg=darkmagenta guisp=#ff22ee   
+
 " syntax hi colors
 hi Comment	term=bold ctermfg=darkcyan guifg=cyan4
 hi PreProc	term=underline ctermfg=darkblue guifg=dodgerblue4
