@@ -43,12 +43,12 @@ ps_scm_f() {
             fi
 
             if ! git update-index --ignore-submodules --refresh > /dev/null; then
-                a="${a}*"
+                a="${a}✗"
             fi
 
             diff=$(git diff-index --cached --name-status -r --ignore-submodules HEAD --)
             case "$diff" in
-                ?*) a="${a}+" ;;
+                ?*) a="${a}±" ;;
             esac
 
             if [[ -n "$(git ls-files --exclude-standard --others 2> /dev/null)" ]] ; then
@@ -57,11 +57,13 @@ ps_scm_f() {
 
             b=${b#refs/heads/}
             b=${b// }
+
             [[ -n "${r}${b}${a}" ]] && s="${r:+${r}:}${b}${a:+ ${a}}"
 
 
             if test -z "$(git diff-index --name-only HEAD --)"; then
                 color="\[\033[01;32m\]" 
+                s="${s:+${s}✔}"
             fi
         fi
     fi
@@ -73,7 +75,7 @@ ps_scm_f() {
 
 __git_prompt_command() {
     ret=$?
-    PS1="\n\[\e[37;1m\]┌─($ret)-(\[\e[34;1m\]\u@\h\[\e[37;1m\])-(\[\[\e[34;1m\]\w\[\e[37;1m\])-($(ps_scm_f)\[\e[37;1m\])\n\[\e[37;1m\]└─╼ \[\e[0m\]"
+    PS1="\n\[\e[37;1m\]┌─(\[\e[34;1m\]\u@\h\[\e[37;1m\])-(\[\[\e[34;1m\]\w\[\e[37;1m\])-($(ps_scm_f)\[\e[37;1m\])\n\[\e[37;1m\]└─╼ \[\e[0m\]"
 }
 PS1="\w\$"
 PROMPT_COMMAND=__git_prompt_command

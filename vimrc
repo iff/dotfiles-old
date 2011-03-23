@@ -2,10 +2,9 @@
 map!  
 " ---------------------------------------------------------------------------
 " first the disabled features due to security concerns
-set modelines=0               " no modelines [http://www.guninski.com/vim1.html]
-let g:secure_modelines_verbose=0 " securemodelines vimscript
-let g:secure_modelines_modelines = 15 " 15 available modelines
-
+set modelines=0                     " no modelines [http://www.guninski.com/vim1.html]
+let g:secure_modelines_verbose=0    " securemodelines vimscript
+let g:secure_modelines_modelines=15 " 15 available modelines
 " ---------------------------------------------------------------------------
 " operational settings
 syntax on
@@ -55,33 +54,32 @@ set matchpairs+=<:>           " add < and > to match pairs
 set dictionary=/usr/share/dict/words " more words!
 
 if !has("gui_running")
-      "colorscheme candycode   " yum candy
-
-      " I pretty much only like this scheme if I can use SIMBL with terminal
-      " colors:
-      " (http://www.culater.net/software/TerminalColors/TerminalColors.php)
-      " to change the really hard-to-read dark blue into a lighter shade.
       "colorscheme ir_black_new "
       "colorscheme rdark
-      colorscheme Mustang
+      "colorscheme Mustang
+      colorscheme fu
 end
 if has("gui_running")
     "colorscheme macvim         " macvim == win
     "colorscheme ir_black_new   " only when I can change certain colors
-    colorscheme rdark
-    let rdark_current_line=1  " highlight current line
-    set background=dark
-    set noantialias
+    "colorscheme rdark
+    colorscheme molokai
+
+    "let rdark_current_line=1  " highlight current line
+    "set background=dark
+    "set noantialias
+    "set lines=64
+    "set columns=135
+    "set transparency=0
+    "set gfn=Monaco:h9.0
+    "set gfn=Menlo:h10.0
+
     set guioptions-=T        " no toolbar
     set guioptions-=m        " no menubar
     set guioptions-=l        " no left scrollbar
     set guioptions-=L        " no left scrollbar
     set guioptions-=r        " no right scrollbar
     set guioptions-=R        " no right scrollbar
-    set lines=64
-    set columns=135
-    set transparency=0
-    set gfn=Monaco:h9.0
     set clipboard=unnamed
 end
 
@@ -107,14 +105,6 @@ let use_xhtml=1
 " Settings for yankring
 let g:yankring_history_dir="~/.vim/"
 let g:yankring_history_file="yank.txt"
-
-" Settings for twitvim
-let twitvim_login=''                " Requires using ,ts to input your username/password
-let g:twitvim_enable_python=1       " Use python for fetchinng the tweets
-let g:twitvim_count=30              " Grab 30 tweets
-map <LocalLeader>tf :FriendsTwitter<cr>
-map <LocalLeader>ts :let twitvim_login=inputdialog('Twitter USER:PASS? ')<cr>
-map <LocalLeader>tw :PosttoTwitter<cr>
 
 " Bindings for Narrow/Widen
 map <LocalLeader>N :Narrow<cr>
@@ -282,6 +272,9 @@ imap jj <Esc>
 iab rbang #!/usr/bin/env ruby<cr>
 iab idef def initialize
 
+" undo tree (gundo)
+nnoremap <F5> :GundoToggle<CR>
+
 " ---------------------------------------------------------------------------
 " setup for the visual environment
 if $TERM =~ '^xterm'
@@ -338,6 +331,7 @@ if has('autocmd')
         autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
 endif
 
+" ---------------------------------------------------------------------------
 " sup format
 au BufRead sup.*    set ft=mail
 

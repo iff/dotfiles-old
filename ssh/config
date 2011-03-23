@@ -1,11 +1,13 @@
-Host *
-      identityfile ~/.ssh/id_dsa
-
 Host github.com
-      identityfile ~/.ssh/github_dsa
+    identityfile ~/.ssh/github_dsa
 
 Host psi.ch
-      ForwardAgent yes
-      ForwardX11 yes
-      User ineichen
+    ForwardAgent yes
+    ForwardX11 yes
+    User ineichen
 
+Host merlin
+    User ineichen
+    ForwardAgent yes
+    ForwardX11 yes
+    HostName merlinl1.psi.ch
