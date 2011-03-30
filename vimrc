@@ -53,6 +53,10 @@ set matchpairs+=<:>           " add < and > to match pairs
 
 set dictionary=/usr/share/dict/words " more words!
 
+" Use 'par' (sudo port install par) to format paragraphs with a width of 80
+set formatprg=par\ -w80
+
+
 if !has("gui_running")
       "colorscheme ir_black_new "
       "colorscheme rdark
@@ -87,7 +91,7 @@ if exists('&t_SI')
       let &t_SI = "\<Esc>]12;lightgoldenrod\x7"
       let &t_EI = "\<Esc>]12;grey80\x7"
 endif
-      
+
 " Settings for taglist.vim
 let Tlist_Use_Right_Window=1
 let Tlist_Auto_Open=0

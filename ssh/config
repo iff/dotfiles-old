@@ -11,3 +11,9 @@ Host merlin
     ForwardAgent yes
     ForwardX11 yes
     HostName merlinl1.psi.ch
+
+host gitolite
+     user git
+     hostname yvesineichen.com
+     port 22
+     identityfile ~/.ssh/iff
