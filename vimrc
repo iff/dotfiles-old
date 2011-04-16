@@ -1,11 +1,16 @@
 "map!  
 map!  
-" ---------------------------------------------------------------------------
+
 " first the disabled features due to security concerns
 set modelines=0                     " no modelines [http://www.guninski.com/vim1.html]
 let g:secure_modelines_verbose=0    " securemodelines vimscript
 let g:secure_modelines_modelines=15 " 15 available modelines
-" ---------------------------------------------------------------------------
+
+" call pathogen to load all plugins in 'bundles' directory
+filetype off
+call pathogen#runtime_append_all_bundles("bundles")
+call pathogen#helptags()
+
 " operational settings
 syntax on
 set ruler                     " show the line number on the bar
@@ -54,7 +59,8 @@ set matchpairs+=<:>           " add < and > to match pairs
 set dictionary=/usr/share/dict/words " more words!
 
 " Use 'par' (sudo port install par) to format paragraphs with a width of 80
-set formatprg=par\ -w80
+set formatprg=par\ -w80rq
+set formatoptions += t
 
 
 if !has("gui_running")
@@ -210,7 +216,7 @@ set history=200
 " spelling...
 if v:version >= 700
 
-  setlocal spell spelllang=en
+  setlocal spell spelllang=en_us
   nmap <LocalLeader>ss :set spell!<CR>
 
 endif
