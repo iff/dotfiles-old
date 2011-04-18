@@ -138,11 +138,11 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 " ---------------------------------------------------------------------------
 "  configuration for fuzzyfinder
 " find in buffer is ,fb
-nmap <LocalLeader>fb :FuzzyFinderBuffer<CR>
+nmap <LocalLeader>fb :FufBuffer<CR>
 " find in file is ,ff
-nmap <LocalLeader>ff :FuzzyFinderFile<CR>
+nmap <LocalLeader>ff :FufFile<CR>
 " find in tag is ,ft
-nmap <LocalLeader>ft :FuzzyFinderTag<CR>
+nmap <LocalLeader>ft :FufTag<CR>
 
 
 " ---------------------------------------------------------------------------
