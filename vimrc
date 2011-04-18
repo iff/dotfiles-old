@@ -60,7 +60,7 @@ set dictionary=/usr/share/dict/words " more words!
 
 " Use 'par' (sudo port install par) to format paragraphs with a width of 80
 set formatprg=par\ -w80rq
-set formatoptions += t
+set formatoptions+=t
 
 
 if !has("gui_running")
