@@ -12,6 +12,13 @@ This is a modest collection of my dotfiles for
     * sup  
     * vim
 
+
+h3. Requirements
+
+    * Vim 7.3+
+    * Some Vim plug-ins require Vim compiled with Python (2.4+) support
+
+
 h3. Installation
 
 Clone the repository and link the files into home.. For bash configurations use:
