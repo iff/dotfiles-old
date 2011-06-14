@@ -55,6 +55,7 @@ set magic                     " Enable the "magic"
 set visualbell t_vb=          " Disable ALL bells
 set cursorline                " show the cursor line
 set matchpairs+=<:>           " add < and > to match pairs
+let mapleader = ","
 
 set dictionary=/usr/share/dict/words " more words!
 
@@ -74,7 +75,7 @@ if has("gui_running")
     "colorscheme ir_black_new   " only when I can change certain colors
     "colorscheme rdark
     colorscheme molokai
-
+    
     "let rdark_current_line=1  " highlight current line
     "set background=dark
     "set noantialias
@@ -281,6 +282,10 @@ imap jj <Esc>
 " ruby helpers
 iab rbang #!/usr/bin/env ruby<cr>
 iab idef def initialize
+
+nnoremap <leader>q gqip
+
+nnoremap <leader>v V']
 
 " undo tree (gundo)
 nnoremap <F5> :GundoToggle<CR>
