@@ -1,27 +1,26 @@
-h2. dot-files
+h1. dot-files
 
-This is a modest collection of my dotfiles and plugins for
+This is a modest collection of dotfiles and plugins shared between my hosts, including
 
     * bash
     * git
     * tmux
     * signatures
-    * ssh  
-    * sup  
+    * ssh
+    * sup
     * vim
 
 
-h3. Requirements
+h2. Requirements
 
     * Vim 7.3+
     * Vim compiled with Python (2.4+) support
 
 
-h3. Installation
+h2. Installation
 
 Clone the repository and link files into home. To include bash configurations use:
 
 bc.. for m in alias prompt sprunge keychain; do
     . "~/shared-dotfiles/bash/$m"
 done
-
