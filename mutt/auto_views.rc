@@ -1,9 +1,0 @@
-######################################################################
-# define some auto views                                             #
-######################################################################
-
-auto_view application/pgp-signature
-auto_view application/pgp
-auto_view application/octet-stream 
-auto_view text/html
-
