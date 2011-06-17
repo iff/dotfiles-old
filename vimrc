@@ -351,6 +351,12 @@ endif
 au BufRead sup.*    set ft=mail
 
 " ---------------------------------------------------------------------------
+" syntax highlighting for various Html templating languages in Haskell
+au BufEnter *.hamlet  setlocal filetype=hamlet
+au BufEnter *.cassius setlocal filetype=cassius
+au BufEnter *.julius  setlocal filetype=julius
+
+" ---------------------------------------------------------------------------
 " ctags
 " configure tags - add additional tags here or comment out not-used ones
 " set tags+=~/.vim/tags/cpp
