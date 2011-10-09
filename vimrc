@@ -375,3 +375,9 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
+function! CoffeeToJS()
+    let res=expand('%')
+    exe 'vnew | r !coffee -p ' . res
+    set ft=javascript
+endfunc
+map <LocalLeader>cj :call CoffeeToJS()<cr>
