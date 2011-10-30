@@ -34,7 +34,7 @@ set backspace=indent,eol,start
 set showfulltag               " show full completion tags
 set noerrorbells              " no error bells please
 set linebreak
-set tw=500                    " default textwidth is a max of 500
+set tw=78                     " default textwidth is a max of 78
 set cmdheight=2               " command line two lines high
 set undolevels=1000           " 1000 undos
 set updatecount=100           " switch every 100 chars
@@ -56,6 +56,10 @@ set visualbell t_vb=          " Disable ALL bells
 set cursorline                " show the cursor line
 set matchpairs+=<:>           " add < and > to match pairs
 let mapleader = ","
+set list                      " enable custom list chars
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
+set showbreak=↪               " show breaks
+set colorcolumn=+1
 
 set dictionary=/usr/share/dict/words " more words!
 
@@ -65,15 +69,10 @@ set formatoptions+=t
 
 
 if !has("gui_running")
-      "colorscheme ir_black_new "
-      "colorscheme rdark
-      "colorscheme Mustang
-      colorscheme fu
+    set background=dark
+    colorscheme solarized
 end
 if has("gui_running")
-    "colorscheme macvim         " macvim == win
-    "colorscheme ir_black_new   " only when I can change certain colors
-    "colorscheme rdark
     colorscheme molokai
     
     "let rdark_current_line=1  " highlight current line
@@ -95,8 +94,8 @@ if has("gui_running")
 end
 
 if exists('&t_SI')
-      let &t_SI = "\<Esc>]12;lightgoldenrod\x7"
-      let &t_EI = "\<Esc>]12;grey80\x7"
+    let &t_SI = "\<Esc>]12;lightgoldenrod\x7"
+    let &t_EI = "\<Esc>]12;grey80\x7"
 endif
 
 " Settings for taglist.vim
@@ -142,6 +141,8 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 nmap <LocalLeader>fb :FufBuffer<CR>
 " find in file is ,ff
 nmap <LocalLeader>ff :FufFile<CR>
+" find in file in current working directory is ,fcf
+nmap <LocalLeader>fcf :FufCoverageFile<CR>
 " find in tag is ,ft
 nmap <LocalLeader>ft :FufTag<CR>
 
@@ -199,7 +200,7 @@ set diffopt=filler,iwhite       " ignore all whitespace and sync
 
 " ---------------------------------------------------------------------------
 "  mouse stuffs
-"set mouse=a                   " mouse support in all modes
+"set mouse=a                  " mouse support in all modes
 set mousehide                 " hide the mouse when typing
 " this makes the mouse paste a block of text without formatting it 
 " (good for code)
@@ -210,8 +211,7 @@ map <MouseMiddle> <esc>"*p
 set backup
 set backupdir=~/.backup
 set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
-set history=200
-"set viminfo='100,f1
+set history=2000
 
 " ---------------------------------------------------------------------------
 " spelling...
@@ -381,3 +381,8 @@ function! CoffeeToJS()
     set ft=javascript
 endfunc
 map <LocalLeader>cj :call CoffeeToJS()<cr>
+
+" vimrc editing. Automatically reload the file after saving it. Because there
+" is no point in editing the file and *not* reloading it, right?
+nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
+autocmd! bufwritepost .vimrc source %
