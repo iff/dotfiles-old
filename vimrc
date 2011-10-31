@@ -11,43 +11,49 @@ filetype off
 call pathogen#runtime_append_all_bundles("bundles")
 call pathogen#helptags()
 
-" operational settings
 syntax on
-set ruler                     " show the line number on the bar
-set more                      " use more prompt
-set autoread                  " watch for file changes
-set number                    " line numbers
-set nohidden                  " close the buffer when I close a tab (I use tabs more than buffers)
-set noautowrite               " don't automagically write on :next
-set lazyredraw                " don't redraw when don't have to
-set showmode
-set showcmd                   " Show us the command we're typing
-set nocompatible              " vim, not vi
+filetype on                   " Enable filetype detection
+filetype indent on            " Enable filetype-specific indenting
+filetype plugin on            " Enable filetype-specific plugins
+
 set autoindent smartindent    " auto/smart indent
 set expandtab                 " expand tabs to spaces
 set smarttab                  " tab and backspace are smart
 set tabstop=4                 " 4 spaces
-set shiftwidth=4
+set shiftwidth=4              " 4 spaces
 set scrolloff=3               " keep at least 3 lines above/below
 set sidescrolloff=5           " keep at least 5 lines left/right
 set backspace=indent,eol,start
+set tw=78                     " default textwidth is a max of 78
+set list                      " enable custom list chars
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
+set showbreak=↪               " show breaks
+set colorcolumn=+1
+set formatprg=par\ -w80rq
+set formatoptions+=t
+set gdefault                  " automatically use /g with search & replace
+
+set ruler                     " show the line number on the bar
+set more                      " use more prompt
+set autoread                  " watch for file changes
+set number                    " line numbers
+set nohidden                  " close the buffer when I close a tab
+set noautowrite               " don't automagically write on :next
+set lazyredraw                " don't redraw when don't have to
+set showmode                  " show mode on last line
+set showcmd                   " Show us the command we're typing
+set nocompatible              " vim, not vi
 set showfulltag               " show full completion tags
 set noerrorbells              " no error bells please
 set linebreak
-set tw=78                     " default textwidth is a max of 78
 set cmdheight=2               " command line two lines high
 set undolevels=1000           " 1000 undos
 set updatecount=100           " switch every 100 chars
 set complete=.,w,b,u,U,t,i,d  " do lots of scanning on tab completion
 set ttyfast                   " we have a fast terminal
-filetype on                   " Enable filetype detection
-filetype indent on            " Enable filetype-specific indenting
-filetype plugin on            " Enable filetype-specific plugins
-compiler ruby                 " Enable compiler support for ruby
 set wildmode=longest:full
 set wildignore+=*.o,*~,.lo    " ignore object files
 set wildmenu                  " menu has tab completion
-let maplocalleader=','        " all my macros start with ,
 set foldmethod=syntax         " fold on syntax automagically, always
 set foldcolumn=3              " 3 lines of column for fold showing, always
 set whichwrap+=<,>,h,l        " backspaces and cursor keys wrap to
@@ -55,26 +61,19 @@ set magic                     " Enable the "magic"
 set visualbell t_vb=          " Disable ALL bells
 set cursorline                " show the cursor line
 set matchpairs+=<:>           " add < and > to match pairs
+
+let maplocalleader=','        " all my macros start with ,
 let mapleader = ","
-set list                      " enable custom list chars
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
-set showbreak=↪               " show breaks
-set colorcolumn=+1
 
-set dictionary=/usr/share/dict/words " more words!
-
-" Use 'par' (sudo port install par) to format paragraphs with a width of 80
-set formatprg=par\ -w80rq
-set formatoptions+=t
-
-
+" ---------------------------------------------------------------------------
+"  configurations for vim or gvim only
 if !has("gui_running")
     set background=dark
     colorscheme solarized
 end
 if has("gui_running")
     colorscheme molokai
-    
+
     "let rdark_current_line=1  " highlight current line
     "set background=dark
     "set noantialias
@@ -93,11 +92,7 @@ if has("gui_running")
     set clipboard=unnamed
 end
 
-if exists('&t_SI')
-    let &t_SI = "\<Esc>]12;lightgoldenrod\x7"
-    let &t_EI = "\<Esc>]12;grey80\x7"
-endif
-
+" ---------------------------------------------------------------------------
 " Settings for taglist.vim
 let Tlist_Use_Right_Window=1
 let Tlist_Auto_Open=0
@@ -107,33 +102,28 @@ let Tlist_WinWidth=28
 let Tlist_Exit_OnlyWindow=1
 let Tlist_File_Fold_Auto_Close = 1
 
+" ---------------------------------------------------------------------------
 " Settings for :TOhtml
 let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
 
+" ---------------------------------------------------------------------------
 " Settings for yankring
 let g:yankring_history_dir="~/.vim/"
 let g:yankring_history_file="yank.txt"
 
+" ---------------------------------------------------------------------------
 " Bindings for Narrow/Widen
 map <LocalLeader>N :Narrow<cr>
 map <LocalLeader>W :Widen<cr>
 
+" ---------------------------------------------------------------------------
 " PHP settings
 let php_sql_query=1
 let php_htmlInStrings=1
 let php_noShortTags=1
 let php_folding=1
-
-" ---------------------------------------------------------------------------
-"  configure autoclose
-"  default to off, I'll turn it on if I want to
-let g:AutoCloseOn = 0
-"  default: {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'"}
-"  but completing ' makes typing lisp really suck, so I take it out of the defaults
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
-
 
 " ---------------------------------------------------------------------------
 "  configuration for fuzzyfinder
@@ -146,47 +136,22 @@ nmap <LocalLeader>fcf :FufCoverageFile<CR>
 " find in tag is ,ft
 nmap <LocalLeader>ft :FufTag<CR>
 
-
 " ---------------------------------------------------------------------------
-" status line 
+" status line
 set laststatus=2
 if has('statusline')
-        " Status line detail: (from Rafael Garcia-Suarez)
-        " %f		file path
-        " %y		file type between braces (if defined)
-        " %([%R%M]%)	read-only, modified and modifiable flags between braces
-        " %{'!'[&ff=='default_file_format']}
-        "			shows a '!' if the file format is not the platform
-        "			default
-        " %{'$'[!&list]}	shows a '*' if in list mode
-        " %{'~'[&pm=='']}	shows a '~' if in patchmode
-        " (%{synIDattr(synID(line('.'),col('.'),0),'name')})
-        "			only for debug : display the current syntax item name
-        " %=		right-align following items
-        " #%n		buffer number
-        " %l/%L,%c%V	line number, total number of lines, and column number
+    function! SetStatusLineStyle()
+        let &stl="%F%m%r%h%w\ [%{&ff}]\ [%Y]\ %P\ %=%{fugitive#statusline()}\ [a=\%03.3b]\ [h=\%02.2B]\ [%l,%v]"
+    endfunc
+    " Not using it at the moment, using a different one
+    call SetStatusLineStyle()
 
-        function! SetStatusLineStyle()
-                "let &stl="%f %y "                       .
-                        "\"%([%R%M]%)"                   .
-                        "\"%#StatusLineNC#%{&ff=='unix'?'':&ff.'\ format'}%*" .
-                        "\"%{'$'[!&list]}"               .
-                        "\"%{'~'[&pm=='']}"              .
-                        "\"%="                           .
-                        "\"#%n %l/%L,%c%V "              .
-                        "\""
-                 "      \"%#StatusLineNC#%{GitBranchInfoString()}%* " .
-              let &stl="%F%m%r%h%w\ [%{&ff}]\ [%Y]\ %P\ %=%{fugitive#statusline()}\ [a=\%03.3b]\ [h=\%02.2B]\ [%l,%v]"
-        endfunc
-        " Not using it at the moment, using a different one
-        call SetStatusLineStyle()
+    if has('title')
+        set titlestring=%t%(\ [%R%M]%)
+    endif
 
-        if has('title')
-                set titlestring=%t%(\ [%R%M]%)
-        endif
-
-        "highlight StatusLine    ctermfg=White ctermbg=DarkBlue cterm=bold
-        "highlight StatusLineNC  ctermfg=White ctermbg=DarkBlue cterm=NONE
+    "highlight StatusLine    ctermfg=White ctermbg=DarkBlue cterm=bold
+    "highlight StatusLineNC  ctermfg=White ctermbg=DarkBlue cterm=NONE
 endif
 
 " ---------------------------------------------------------------------------
@@ -196,13 +161,13 @@ set ignorecase                " search ignoring case
 set smartcase                 " Ignore case when searching lowercase
 set hlsearch                  " highlight the search
 set showmatch                 " show matching bracket
-set diffopt=filler,iwhite       " ignore all whitespace and sync
+set diffopt=filler,iwhite     " ignore all whitespace and sync
 
 " ---------------------------------------------------------------------------
-"  mouse stuffs
+"  mouse stuff
 "set mouse=a                  " mouse support in all modes
 set mousehide                 " hide the mouse when typing
-" this makes the mouse paste a block of text without formatting it 
+" this makes the mouse paste a block of text without formatting it
 " (good for code)
 map <MouseMiddle> <esc>"*p
 
@@ -223,6 +188,7 @@ if v:version >= 700
 endif
 " default to no spelling
 set nospell
+set dictionary=/usr/share/dict/words
 
 " ---------------------------------------------------------------------------
 " Turn on omni-completion for the appropriate file types.
@@ -279,40 +245,21 @@ cmap w!! %!sudo tee > /dev/null %
 inoremap # X<BS>#
 " When I forget I'm in Insert mode, how often do you type 'jj' anyway?:
 imap jj <Esc>
-" ruby helpers
-iab rbang #!/usr/bin/env ruby<cr>
-iab idef def initialize
 
 nnoremap <leader>q gqip
-
 nnoremap <leader>v V']
 
 " undo tree (gundo)
 nnoremap <F5> :GundoToggle<CR>
 
 " ---------------------------------------------------------------------------
-" setup for the visual environment
-if $TERM =~ '^xterm'
-        set t_Co=256 
-elseif $TERM =~ '^screen-bce'
-        set t_Co=256            " just guessing
-elseif $TERM =~ '^rxvt'
-        set t_Co=88
-elseif $TERM =~ '^linux'
-        set t_Co=8
-else
-        set t_Co=16
-endif
-
-" ---------------------------------------------------------------------------
 " tabs
-" (LocalLeader is ",")
-map <LocalLeader>tc :tabnew %<cr>    " create a new tab       
+map <LocalLeader>tc :tabnew %<cr>    " create a new tab
 map <LocalLeader>td :tabclose<cr>    " close a tab
 map <LocalLeader>tn :tabnext<cr>     " next tab
-map <silent><A-Right> :tabnext<cr>           " next tab
+map <silent><A-Right> :tabnext<cr>   " next tab
 map <LocalLeader>tp :tabprev<cr>     " previous tab
-map <silent><A-Left> :tabprev<cr>            " previous tab
+map <silent><A-Left> :tabprev<cr>    " previous tab
 map <LocalLeader>tm :tabmove         " move a tab to a new location
 
 " ---------------------------------------------------------------------------
@@ -344,6 +291,9 @@ if has('autocmd')
         " improved formatting for markdown
         " http://plasticboy.com/markdown-vim-mode/
         autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+
+        " strip all whitespaces at save
+        autocmd BufWritePre * :%s/\s\+$//e
 endif
 
 " ---------------------------------------------------------------------------
@@ -375,6 +325,8 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
+" ---------------------------------------------------------------------------
+" Compile current coffee script buffer to javascript and open in new vsplit
 function! CoffeeToJS()
     let res=expand('%')
     exe 'vnew | r !coffee -p ' . res
@@ -382,6 +334,7 @@ function! CoffeeToJS()
 endfunc
 map <LocalLeader>cj :call CoffeeToJS()<cr>
 
+" ---------------------------------------------------------------------------
 " vimrc editing. Automatically reload the file after saving it. Because there
 " is no point in editing the file and *not* reloading it, right?
 nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
