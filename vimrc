@@ -61,6 +61,7 @@ set magic                     " Enable the "magic"
 set visualbell t_vb=          " Disable ALL bells
 set cursorline                " show the cursor line
 set matchpairs+=<:>           " add < and > to match pairs
+set t_Co=256
 
 let maplocalleader=','        " all my macros start with ,
 let mapleader = ","
@@ -251,6 +252,9 @@ nnoremap <leader>v V']
 
 " undo tree (gundo)
 nnoremap <F5> :GundoToggle<CR>
+
+" run pdflatex on currently open file
+nmap <LocalLeader>pl :!pdflatex %<cr><cr>
 
 " ---------------------------------------------------------------------------
 " tabs
