@@ -1,14 +1,14 @@
-urxvt*font:             xft:Deja Vu Sans Mono:pixelsize=12
-urxvt*termName:         rxvt
+urxvt*font:             xft:Deja Vu Sans Mono:size=10
+urxvt*termName:         rxvt-unicode
 urxvt*scrollBar:        false
-urxvt*perl-ext-common:  default,matcher
-urxvt*urlLauncher:      /usr/bin/chromium-browser
+urxvt*urlLauncher:      /usr/bin/chromium
 urxvt*matcher.button:   1
+urxvt.transparent:      false
+urxvt.fading:           0
 
 Xft*dpi:                127
-Xft*antialias:          false
-Xft*hinting:            none
-URxvt.transparent:      false
+!Xft*antialias:          false
+!Xft*hinting:            none
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
