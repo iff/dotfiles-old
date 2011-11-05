@@ -71,6 +71,7 @@ let mapleader = ","
 if !has("gui_running")
     set background=dark
     colorscheme solarized
+    let g:AutoClosePreservDotReg=0
 end
 if has("gui_running")
     colorscheme molokai
