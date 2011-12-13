@@ -1,15 +1,3 @@
-urxvt*font:             xft:Deja Vu Sans Mono:size=10
-urxvt*termName:         rxvt-unicode
-urxvt*scrollBar:        false
-urxvt*urlLauncher:      /usr/bin/chromium
-urxvt*matcher.button:   1
-urxvt.transparent:      false
-urxvt.fading:           0
-
-Xft*dpi:                127
-!Xft*antialias:          false
-!Xft*hinting:            none
-
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
 !!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
@@ -50,7 +38,6 @@ Xft*dpi:                127
 
 *background:            S_base03
 *foreground:            S_base00
-*fade:                  0
 *fadeColor:             S_base03
 *cursorColor:           S_base1
 *pointerColorBackground:S_base01
