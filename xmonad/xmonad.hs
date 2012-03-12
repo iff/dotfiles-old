@@ -4,30 +4,33 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.NoBorders
 import XMonad.Util.CustomKeys
+import XMonad.Util.Scratchpad
 
 main = xmonad defaultConfig
     { modMask = mod4Mask
-    , terminal = "konsole"    
+    , terminal = "konsole"
     , normalBorderColor = "gray30"
     , focusedBorderColor = "#aecf96"
     , borderWidth = 1
-    , manageHook = myManageHook
+    , manageHook = myManageHook <+> manageScratchPad
     , layoutHook = myLayoutHook
-    , workspaces = ["1:yi", "2:web", "3:dev", "4:dev", "5:tmp", "6:tmp", "7:tmp", "8:tmp", "9:comm"]
+    , workspaces = ["1:matrix", "2:web", "3:dev", "4:comm", "5:tmp", "6:tmp", "7:tmp", "8:tmp", "9:tmp"]
     , keys = customKeys delkeys inskeys
-    } 
+    }
     where
         delkeys :: XConfig l -> [(KeyMask, KeySym)]
         delkeys XConfig {modMask = modm} =
-            -- we're preferring Futurama to Xinerama here
-            --[ (modm .|. m, k) | (m, k) <- zip [0, shiftMask] [xK_w, xK_e, xK_r] ]
             [
             ]
 
         inskeys :: XConfig l -> [((KeyMask, KeySym), X ())]
         inskeys conf@(XConfig {modMask = modm}) =
             [ ((modm .|. controlMask, xK_l ), spawn "xscreensaver-command -lock")
+            , ((mod4Mask, xK_f), scratchPad)
+            , ((0, xK_Print), spawn "import ~/screen.png")
             ]
+            where
+                scratchPad = scratchpadSpawnActionTerminal "konsole"
 
 myLayoutHook = smartBorders $ avoidStruts $ tiled ||| Mirror tiled ||| Full
     where
@@ -40,9 +43,19 @@ myLayoutHook = smartBorders $ avoidStruts $ tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
         [ floatC "MPlayer"
         , floatC "Gimp"
+        , moveToC "Firefox" "2"
+        , moveToC "Chrome" "2"
         , moveToC "Chromium-browser" "2"
         ]
     where moveToC c w = className =? c --> doF (W.shift w)
           moveToT t w = title     =? t --> doF (W.shift w)
           floatC  c   = className =? c --> doFloat
 
+manageScratchPad :: ManageHook
+manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
+
+  where
+    h = 0.5     -- terminal height, 10%
+    w = 1       -- terminal width, 100%
+    t = 1 - h   -- distance from top edge, 90%
+    l = 1 - w   -- distance from left edge, 0%
