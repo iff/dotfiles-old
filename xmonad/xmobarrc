@@ -1,0 +1,14 @@
+Config { font = "xft:DejaVu Sans Mono:size=9:bold"
+       , bgColor = "#002b36"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Network "eth0" ["-L","0","-H","32","--normal","#859900","--high","#dc322f"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","#859900","--high","#dc322f"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%cpu% | %memory% | %eth0% }{ <fc=#cb4b16>%date%</fc>"
+       }
