@@ -13,10 +13,10 @@ alias md='mkdir -p'
 alias open='xdg-open'
 
 # ssh
-alias gof='ssh -YCAt ineichen@merlinl1.psi.ch ssh -YCA ineichen@felsim00.psi.ch'
+alias gof='ssh -YCAt ineichen@llcx.psi.ch ssh -YCA ineichen@felsim00.psi.ch'
 alias goy='ssh -YCA iff@yvesineichen.com'
 alias goo='ssh -YC ineichen@obiwan.ethz.ch'
-alias authpsi='ssh -o PreferredAuthentications=password -f -N ineichen@balrog.psi.ch'
+alias authpsi='ssh -o PreferredAuthentications=password -o ServerAliveInterval=60 -f -N ineichen@balrog.psi.ch'
 
 # sshfs
 alias mf='sshfs ineichen@felsim00: ~/mnt/felsim'
