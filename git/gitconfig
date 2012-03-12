@@ -1,6 +1,7 @@
 [user]
 	name = iff
     email = iff@yvesineichen.com
+	signingkey = 165AEDEB
 
 [core]
     pager = less -FRSX
@@ -11,7 +12,7 @@
     ui = true
 
 [merge]
-    tool = gvimdiff3
+    tool = vimdiff3
 
 [rerere]
     enabled = 1
