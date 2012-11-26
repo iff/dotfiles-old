@@ -301,26 +301,8 @@ set dictionary=/usr/share/dict/words
 
 
 " ---------------------------------------------------------------------------
-" Turn on omni-completion for the appropriate file types.
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1  " Rails support
-" ---------------------------------------------------------------------------
-
-
-" ---------------------------------------------------------------------------
 " some useful mappings
 
-" Omnicomplete as Ctrl+Space
-inoremap <Nul> <C-x><C-o>
-" Also map user-defined omnicompletion as Ctrl+k
-inoremap <C-k> <C-x><C-u>
 " toggle list mode
 nmap <LocalLeader>tl :set list!<cr>
 " toggle paste mode
@@ -638,7 +620,6 @@ augroup END
 augroup ft_python
     au!
 
-    " au FileType python setlocal omnifunc=pythoncomplete#Complete
     au FileType python setlocal define=^\s*\\(def\\\\|class\\)
     "au FileType python compiler nose
     au FileType man nnoremap <buffer> <cr> :q<cr>
