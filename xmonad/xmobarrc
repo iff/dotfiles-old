@@ -1,5 +1,5 @@
 Config { font = "xft:DejaVu Sans Mono:size=9:bold"
-       , bgColor = "#002b36"
+       , bgColor = "#000000"
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = True
@@ -7,8 +7,10 @@ Config { font = "xft:DejaVu Sans Mono:size=9:bold"
                     , Run Cpu ["-L","3","-H","50","--normal","#859900","--high","#dc322f"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Com "/home/iff/local/bin/lastsync.sh" [] "lastup" 600
+                    , Run Com "/home/iff/local/bin/current-emerge.sh" [] "curemerge" 60
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% | %eth0% }{ <fc=#cb4b16>%date%</fc>"
+       , template = "%cpu% | %memory% | %eth0% }{ <fc=#6c71c4>%curemerge%</fc> Last sync: <fc=#6c71c4>%lastup%</fc> | <fc=#cb4b16>%date%</fc>"
        }
