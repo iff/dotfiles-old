@@ -8,7 +8,7 @@ import XMonad.Util.Scratchpad
 
 main = xmonad defaultConfig
     { modMask = mod4Mask
-    , terminal = "konsole"
+    , terminal = "urxvt"
     , normalBorderColor = "gray30"
     , focusedBorderColor = "#aecf96"
     , borderWidth = 1
