@@ -37,8 +37,8 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
 set fillchars=diff:⣿,vert:│
 set showbreak=↪               " show breaks
 set colorcolumn=+1
-set formatprg=par\ -w80rq
-set formatoptions+=t
+"set formatprg=par\ -w80rq
+"set formatoptions+=t
 
 set encoding=utf-8
 set hidden
@@ -599,9 +599,13 @@ if has('autocmd')
         " improved formatting for markdown
         " http://plasticboy.com/markdown-vim-mode/
         autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+        autocmd BufRead *.md   set ai formatoptions=tcroqn2 comments=n:>
 
         " strip all whitespaces at save
         autocmd BufWritePre * :%s/\s\+$//e
+
+        " improve editing TeX files
+        autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
 endif
 
 augroup ft_c
