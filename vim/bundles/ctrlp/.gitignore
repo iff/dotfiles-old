@@ -1,6 +1,4 @@
-*.markdown
-*.zip
-note.txt
-tags
-.hg*
-tmp/*
+.gitignore
+install.bat
+doc/tags
+cookies/
