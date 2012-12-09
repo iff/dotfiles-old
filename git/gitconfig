@@ -21,18 +21,7 @@
 [mergetool "splice"]
     cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
     trustExitCode = true
-
-[mergetool "gvimdiff3"]
-    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-
-[mergetool "vimdiff3"]
-    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-
-#[diff]
-#    external = git_vimdiff_wrapper
-
-#[pager]
-#    diff =
+    keepBackup = false
 
 [alias]
     st = status
