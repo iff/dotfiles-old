@@ -1,7 +1,7 @@
 [user]
-	name = iff
+    name = iff
     email = iff@yvesineichen.com
-	signingkey = 165AEDEB
+    signingkey = 165AEDEB
 
 [core]
     pager = less -FRSX
@@ -23,10 +23,10 @@
     trustExitCode = true
 
 [mergetool "gvimdiff3"]
-	cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 [mergetool "vimdiff3"]
-	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 #[diff]
 #    external = git_vimdiff_wrapper
