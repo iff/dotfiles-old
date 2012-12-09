@@ -1,19 +1,6 @@
-Host github.com
-    identityfile ~/.ssh/github_dsa
+IdentityFile ~/.ssh/$HOST
 
 Host psi.ch
     ForwardAgent yes
     ForwardX11 yes
     User ineichen
-
-Host merlin
-    User ineichen
-    ForwardAgent yes
-    ForwardX11 yes
-    HostName merlinl1.psi.ch
-
-host gitolite
-     user git
-     hostname yvesineichen.com
-     port 22
-     identityfile ~/.ssh/iff
