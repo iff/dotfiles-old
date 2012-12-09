@@ -1,91 +1,96 @@
-# Installation  
+vim-slime
+=========
 
-_\*For simplicity, let's use **[VIM_ROOT]** which will mean ~/.vim (\*nix) or ~/vimfiles (Windows)_
+Grab some text and "send" it to a [GNU Screen](http://www.gnu.org/software/screen/) / [tmux](http://tmux.sourceforge.net/) session.
 
-The NERD Commenter requires Vim 7 or higher is comprised of 2 files:  
+    VIM ---(text)---> screen / tmux
 
-    plugin/NERD_commenter.vim  
-    doc/NERD_commenter.txt 
+Presumably, your screen contains something interesting like, say, a Clojure [REPL](http://en.wikipedia.org/wiki/REPL). But if it can
+receive typed text, it can receive it from vim-slime.
 
-### Classic Install
+The reason you're doing this? Because you want the benefits of a REPL and the benefits of using Vim (familiar environment, syntax highlighting, persistence ...).
 
-1. Extract the plugin files into your **[VIM_ROOT]**/plugin and **[VIM_ROOT]**/doc folders respectively.
-2. Finish the install by updating your help files.  Run:
+Read the [blog post](http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/).
 
-<pre><code>:helptags [VIM_ROOT]/doc</code></pre>
+Installation
+------------
 
-See **|add-local-help|** for more details. 
+I recommend installing [pathogen.vim](https://github.com/tpope/vim-pathogen), and
+then simply copy and paste:
 
-### Pathogen Install
-1. Navigate to your **[VIM_ROOT]/bundle** directory in your local Vim setup
-2. git clone https://github.com/scrooloose/nerdcommenter.git
+    cd ~/.vim/bundle
+    git clone git://github.com/jpalardy/vim-slime.git
 
-### Post Install  
-After the **'Classic'** or **'Pathogen'** install, make sure that you have filetype plugins enabled, as the script makes use of 
-**|'commentstring'|** where possible (which is usually set in a filetype plugin). 
-See **|filetype-plugin-on|** for details, but basically, stick this in your vimrc:
+If you like it the hard way, copy plugin/slime.vim from this repo into ~/.vim/plugin.
 
-    filetype plugin on
+Configuration (GNU Screen)
+--------------------------
 
-# Usage  
+By default, GNU Screen is assumed, you don't have to do anything. If you want
+to be explicit, you can add this line to your .vimrc:
 
-The following key mappings are provided by default (there is also a menu 
-provided that contains menu items corresponding to all the below mappings): 
+    let g:slime_target = "screen"
 
-Most of the following mappings are for normal/visual mode only. The |NERDComInsertComment| mapping is for insert mode only. 
+Because Screen doesn't accept input from STDIN, a file is used to pipe data
+between Vim and Screen. By default this file is set to `$HOME/.slime_paste`.
+The name of the file used can be configured through a variable:
 
-**[count]\<leader\>cc |NERDComComment|**  
-Comment out the current line or text selected in visual mode. 
+    let g:slime_paste_file = "$HOME/.slime_paste"
 
+This file is not erased by the plugin and will always contain the last thing
+you sent over. If this is a problem, I recommend you switch to tmux.
 
-**[count]\<leader\>cn |NERDComNestedComment|**  
-Same as \<leader\>cc but forces nesting. 
+When you invoke vim-slime for the first time (see below), you will be prompted for more configuration.
 
+screen session name
 
-**[count]\<leader\>c<space> |NERDComToggleComment|**  
-Toggles the comment state of the selected line(s). If the topmost selected 
-line is commented, all selected lines are uncommented and vice versa. 
+    This is what you put in the -S flag, or one of the line of "screen -ls".
 
+screen window name
 
-**[count]\<leader\>cm |NERDComMinimalComment|**  
-Comments the given lines using only one set of multipart delimiters. 
+    This is the window number or name, zero-based.
 
+Configuration (tmux)
+--------------------
 
-**[count]\<leader\>ci |NERDComInvertComment|**  
-Toggles the comment state of the selected line(s) individually. 
+Tmux is *not* the default, to use it you will have to add this line to your .vimrc:
 
+    let g:slime_target = "tmux"
 
-**[count]\<leader\>cs |NERDComSexyComment|**  
-Comments out the selected lines ``sexily'' 
+When you invoke vim-slime for the first time (see below), you will be prompted for more configuration.
 
+tmux socket name
 
-**[count]\<leader\>cy |NERDComYankComment|**  
-Same as \<leader\>cc except that the commented line(s) are yanked first. 
+    This is what you put in the -L flag, it will be "default" if you didn't put anything.
 
+tmux target pane
 
-**\<leader\>c$ |NERDComEOLComment|**  
-Comments the current line from the cursor to the end of line. 
+    ":" means current window, current pane (a reasonable default)
+    ":i" means the ith window, current pane
+    ":i.j" means the ith window, jth pane
+    "h:i.j" means the tmux session where h is the session identifier (either session name or number), the ith window and the jth pane 
 
+By default `STDIN` is used to pass the text to tmux.
+If you experience issues with this you may be able to work around them
+by configuring slime to use a file instead:
 
-**\<leader\>cA |NERDComAppendComment|**  
-Adds comment delimiters to the end of line and goes into insert mode between 
-them. 
+    let g:slime_paste_file = "$HOME/.slime_paste"
 
+This file is not erased by the plugin and will always contain the last thing
+you sent over.  If this behavior is undesired one alternative is to use a temporary file:
 
-**|NERDComInsertComment|**  
-Adds comment delimiters at the current cursor position and inserts between. 
-Disabled by default. 
+    let g:slime_paste_file = tempname()
 
+Key Bindings
+------------
 
-**\<leader\>ca |NERDComAltDelim|**  
-Switches to the alternative set of delimiters. 
+By default, the current paragraph will be sent. This is equivalent to typing *vip*. If you (visually) select text, that will be sent over:
 
+    C-c, C-c  --- the same as slime
+    
+_You can just hold `Ctrl` and double-tap `c`._
 
-**[count]\<leader\>cl**  
-**[count]\<leader\>cb    |NERDComAlignedComment|**  
-Same as |NERDComComment| except that the delimiters are aligned down the 
-left side (\<leader\>cl) or both sides (\<leader\>cb). 
+There will be a few questions, as to where you want to send your text, and the answers will be remembered. If you need to reconfigure:
 
+    C-c, v    --- mnemonic: "variables"
 
-**[count]\<leader\>cu |NERDComUncommentLine|**  
-Uncomments the selected line(s). 
