@@ -1,4 +1,8 @@
-.gitignore
-install.bat
-doc/tags
-cookies/
+.hgignore
+*.markdown
+*.zip
+wiki.md
+note.txt
+tags
+.hg/*
+tmp/*
