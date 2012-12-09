@@ -14,31 +14,31 @@ endif
 
 syntax spell toplevel
 
-syn match hmString contained /"[^"]*"/ contains=hmVar,hmExp
+syn match hmString  contained /"[^"]*"/ contains=hmVar,hmRoute,hmLang
+syn match hmNum     contained /\<[0-9]\+\>/
+syn match hmTrail   display excludenl /\s\+$/
+syn match hmComment display /\(\$#.*$\|<!--.*-->\)/
 
-" todo: we need the leading anchor (^) to prevent invalid nesting from 
-" highligting; however, this prevents oneliners from working -- we need 
-" some way to anchor to (start-of-line OR start-of-region).
-syn match hmKey /^\s*<[^>$]*>\?/ contains=hmVar,hmExp,hmAttr,hmString
+" We use the leading anchor (^) to prevent invalid nesting from
+" highlighting; however, this prevents oneliner QQs from working.
+syn match hmKey /^\s*\\\?\s*<[^!][^>]*>/ contains=hmVar,hmRoute,hmAttr,hmString,hmCond,hmAttrs
+syn match hmAttr contained /\(\.\|#\)[^ >]*/ contains=hmString,hmVar,hmRoute,hmLang
+syn match hmCond contained /:[^:]\+:\([^ ]*"[^"]*"\|[^ >]*\)/ contains=hmString,hmNumber,hmCondOp,hmHsOp
 
-syn match hmAttr contained /\(\.\|#\)[^ >]*/ contains=hmString,hmVar,hmExp
-syn match hmHsOp contained /\(\$\|\.\)/
-syn match hmTmpl /\^{[^}]*}/ contains=hmString,hmHsOp
-syn match hmVar /\#{[^}]*}/ contains=hmString,hsHsOp
-syn match hmLang /_{[^}]*}/ contains=hmString,hsHsOp
-syn match hmExp /@{[^}]*}/ contains=hmString,hmHsOp
-syn match hmStmt /^\s*\$.\+$/ contains=hmFunc,hmStmtOps
-syn match hmFunc contained /\$\(maybe\|nothing\|forall\|if\|elseif\|else\|with\)/
-syn match hmStmtOps contained /\(<-\|,\)/
-syn match hmTrail display excludenl /\s\+$/
+" various interpolations
+syn region hmVar   matchgroup=hmVarDelim   start="#{"  end="}" contains=hmHsOp,hmString,hmNum
+syn region hmAttrs matchgroup=hmAttrsDelim start="\*{" end="}" contains=hmHsOp,hmString,hmNum
+syn region hmRoute matchgroup=hmRouteDelim start="@{"  end="}" contains=hmHsOp,hmString,hmNum
+syn region hmTmpl  matchgroup=hmTmplDelim  start="\^{" end="}" contains=hmHsOp,hmString,hmNum
+syn region hmLang  matchgroup=hmLangDelim  start="_{"  end="}" contains=hmHsOp,hmString,hmNum
 
-syn include @HTML syntax/html.vim
-unlet b:current_syntax
-syn match hmHTML /\\<[^>]\+>/ contains=@HTML
+" can't use keyword due to special chars
+syn match hmHsOp   contained /\(\$\|\.\)/
+syn match hmCondOp contained /:/
+syn match hmFuncOp contained /<-/
 
-"
-" todo: embedded javascript is real hard without that </script> closure
-"
+syn match hmStmt /^\s*\$.\+$/ contains=hmFunc,hmFuncOp,hmComment transparent
+syn match hmFunc contained /\$\(doctype\|maybe\|nothing\|forall\|if\|elseif\|else\|with\|case\|of\)/
 
 if version < 508
   command! -nargs=+ HiLink hi link <args>
@@ -46,17 +46,24 @@ else
   command! -nargs=+ HiLink hi def link <args>
 endif
 
-HiLink hmString String
-HiLink hmKey    Identifier
-HiLink hmHsOp   Operator
-HiLink hmAttr   Operator
-HiLink hmBindOp Operator
-HiLink hmTmpl   Number
-HiLink hmVar    Structure
-HiLink hmLang   Structure
-HiLink hmExp    Type
-HiLink hmFunc   Function
-HiLink hmTrail  Error
+HiLink hmString  String
+HiLink hmNum     Number
+HiLink hmKey     Identifier
+HiLink hmHsOp    Operator
+HiLink hmAttr    Operator
+HiLink hmCond    Function
+HiLink hmCondOp  Number
+HiLink hmRoute   Type
+HiLink hmTmpl    Number
+HiLink hmFunc    Function
+HiLink hmFuncOp  Number
+HiLink hmTrail   Error
+HiLink hmComment Comment
+
+HiLink hmVarDelim   Delimiter
+HiLink hmRouteDelim Delimiter
+HiLink hmLangDelim  Delimiter
+HiLink hmTmplDelim  Delimiter
 
 delcommand HiLink
 
