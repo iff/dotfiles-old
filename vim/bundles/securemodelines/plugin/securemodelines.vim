@@ -6,9 +6,10 @@
 " License:          Redistribute under the same terms as Vim itself
 " Purpose:          A secure alternative to modelines
 
-if &compatible || v:version < 700
+if &compatible || v:version < 700 || exists('g:loaded_securemodelines')
     finish
 endif
+let g:loaded_securemodelines = 1
 
 if (! exists("g:secure_modelines_allowed_items"))
     let g:secure_modelines_allowed_items = [
@@ -21,6 +22,9 @@ if (! exists("g:secure_modelines_allowed_items"))
                 \ "foldmethod",  "fdm",
                 \ "readonly",    "ro",   "noreadonly", "noro",
                 \ "rightleft",   "rl",   "norightleft", "norl",
+                \ "cindent",     "cin",  "nocindent", "nocin",
+                \ "smartindent", "si",   "nosmartindent", "nosi",
+                \ "autoindent",  "ai",   "noautoindent", "noai",
                 \ "spell",
                 \ "spelllang"
                 \ ]
@@ -55,7 +59,7 @@ fun! <SID>IsInList(list, i) abort
 endfun
 
 fun! <SID>DoOne(item) abort
-    let l:matches = matchlist(a:item, '^\([a-z]\+\)\%(=[a-zA-Z0-9_\-.]\+\)\?$')
+    let l:matches = matchlist(a:item, '^\([a-z]\+\)\%([-+^]\?=[a-zA-Z0-9_\-.]\+\)\?$')
     if len(l:matches) > 0
         if <SID>IsInList(g:secure_modelines_allowed_items, l:matches[1])
             exec "setlocal " . a:item
@@ -92,7 +96,7 @@ fun! <SID>CheckVersion(op, ver) abort
 endfun
 
 fun! <SID>DoModeline(line) abort
-    let l:matches = matchlist(a:line, '\%(\S\@<!\%(vi\|vim\([<>=]\?\)\([0-9]\+\)\?\)\|\sex\):\s\+set\?\s\+\([^:]\+\):\S\@!')
+    let l:matches = matchlist(a:line, '\%(\S\@<!\%(vi\|vim\([<>=]\?\)\([0-9]\+\)\?\)\|\sex\):\s*\%(set\s\+\)\?\([^:]\+\):\S\@!')
     if len(l:matches) > 0
         let l:operator = ">"
         if len(l:matches[1]) > 0
