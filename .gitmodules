@@ -1,0 +1,75 @@
+[submodule "vim/vim.symlink/bundles/powerline"]
+	path = vim/vim.symlink/bundles/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/vim.symlink/bundles/python-mode"]
+	path = vim/vim.symlink/bundles/python-mode
+	url = https://github.com/klen/python-mode.git
+[submodule "vim/vim.symlink/bundles/splice"]
+	path = vim/vim.symlink/bundles/splice
+	url = https://github.com/sjl/splice.vim.git
+[submodule "vim/vim.symlink/bundles/ctrlp"]
+	path = vim/vim.symlink/bundles/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/vim.symlink/bundles/gist-vim"]
+	path = vim/vim.symlink/bundles/gist-vim
+	url = https://github.com/mattn/gist-vim.git
+[submodule "vim/vim.symlink/bundles/vim-stylus"]
+	path = vim/vim.symlink/bundles/vim-stylus
+	url = git://github.com/wavded/vim-stylus.git
+[submodule "vim/vim.symlink/bundles/vim-jade"]
+	path = vim/vim.symlink/bundles/vim-jade
+	url = git://github.com/digitaltoad/vim-jade.git
+[submodule "vim/vim.symlink/bundles/vim-rainbow"]
+	path = vim/vim.symlink/bundles/vim-rainbow
+	url = https://github.com/chrismetcalf/vim-rainbow.git
+[submodule "vim/vim.symlink/bundles/supertab"]
+	path = vim/vim.symlink/bundles/supertab
+	url = https://github.com/vim-scripts/SuperTab-continued..git
+[submodule "vim/vim.symlink/bundles/html-template-syntax"]
+	path = vim/vim.symlink/bundles/html-template-syntax
+	url = https://github.com/pbrisbin/html-template-syntax.git
+[submodule "vim/vim.symlink/bundles/vim-coffee-script"]
+	path = vim/vim.symlink/bundles/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/vim.symlink/bundles/extradite"]
+	path = vim/vim.symlink/bundles/extradite
+	url = https://github.com/int3/vim-extradite.git
+[submodule "vim/vim.symlink/bundles/securemodelines"]
+	path = vim/vim.symlink/bundles/securemodelines
+	url = https://github.com/ciaranm/securemodelines.git
+[submodule "vim/vim.symlink/bundles/snipmate"]
+	path = vim/vim.symlink/bundles/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim/vim.symlink/bundles/slime"]
+	path = vim/vim.symlink/bundles/slime
+	url = https://github.com/jpalardy/vim-slime.git
+[submodule "vim/vim.symlink/bundles/L9"]
+	path = vim/vim.symlink/bundles/L9
+	url = https://github.com/vim-scripts/L9.git
+[submodule "vim/vim.symlink/bundles/ack"]
+	path = vim/vim.symlink/bundles/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "vim/vim.symlink/bundles/YankRing"]
+	path = vim/vim.symlink/bundles/YankRing
+	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "vim/vim.symlink/bundles/gundo"]
+	path = vim/vim.symlink/bundles/gundo
+	url = http://github.com/sjl/gundo.vim.git
+[submodule "vim/vim.symlink/bundles/narrow"]
+	path = vim/vim.symlink/bundles/narrow
+	url = https://github.com/kana/vim-narrow.git
+[submodule "vim/vim.symlink/bundles/fugitive"]
+	path = vim/vim.symlink/bundles/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim.symlink/bundles/autoclose"]
+	path = vim/vim.symlink/bundles/autoclose
+	url = https://github.com/Townk/vim-autoclose.git
+[submodule "vim/vim.symlink/bundles/nerdcommenter"]
+	path = vim/vim.symlink/bundles/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/vim.symlink/bundles/tabular"]
+	path = vim/vim.symlink/bundles/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "vim/vim.symlink/bundles/nerdtree"]
+	path = vim/vim.symlink/bundles/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git

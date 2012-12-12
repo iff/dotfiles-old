@@ -19,7 +19,13 @@ h2. Requirements
 
 h2. Installation
 
-Clone the repository and link files into home. To include bash configurations use:
+Clone the repository and link files into home. Run
+
+bc.. git submodule init
+git submodule update
+
+
+h3. To include bash configurations use:
 
 bc.. for m in alias prompt sprunge keychain; do
     . "~/shared-dotfiles/bash/$m"
