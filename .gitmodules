@@ -76,3 +76,6 @@
 [submodule "vim/vim.symlink/syntastic"]
 	path = vim/vim.symlink/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/vim.symlink/ycm"]
+	path = vim/vim.symlink/ycm
+	url = https://github.com/Valloric/YouCompleteMe.git
