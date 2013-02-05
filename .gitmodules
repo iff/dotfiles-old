@@ -73,3 +73,9 @@
 [submodule "vim/vim.symlink/bundles/nerdtree"]
 	path = vim/vim.symlink/bundles/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/vim.symlink/bundles/syntastic"]
+	path = vim/vim.symlink/bundles/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/vim.symlink/bundles/ycm"]
+	path = vim/vim.symlink/bundles/ycm
+	url = https://github.com/Valloric/YouCompleteMe.git
