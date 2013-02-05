@@ -5,7 +5,7 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/local/include
 
 # OPAL stuff
 export OPAL_ROOT=$HOME/work/psi/opal
-export OPAL_PREFIX=$HOME/local/
+export OPAL_LIB_PREFIX=$HOME/local/
 export IPPL_ROOT=$HOME/work/psi/ippl
 export IPPL_PREFIX=$HOME/local/ippl
 export H5hut=$HOME/local
