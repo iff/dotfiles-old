@@ -56,13 +56,29 @@ sec_up() {
   fi
 }
 
+bat_status() {
+  s=""
+  charging=$(cat /sys/class/power_supply/AC/online 2>&1)
+  if [ $charging != 0 ]
+  then
+    s="⚡"
+  fi
+  if [ -d /sys/class/power_supply/BAT0 ]
+  then
+    percent=$(cat /sys/class/power_supply/BAT0/capacity 2>&1)
+    echo "[${s}${percent}%%]"
+  else
+    echo ""
+  fi
+}
+
 directory_name(){
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
 export PROMPT=$'\n%{$fg_bold[yellow]%}%n%{$reset_color%} in $(directory_name) $(git_dirty)$(need_push)\n› '
 set_prompt () {
-  export RPROMPT="%{$fg_bold[red]%}$(sec_up) %{$fg_bold[cyan]%}%T%{$reset_color%}"
+  export RPROMPT="%{$fg_bold[red]%}$(sec_up) $(bat_status) %{$fg_bold[cyan]%}%T%{$reset_color%}"
 }
 
 precmd() {
