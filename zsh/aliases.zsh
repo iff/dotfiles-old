@@ -13,5 +13,5 @@ alias 'gof=ssh -YCAt ineichen@llcx.psi.ch ssh -YCA ineichen@felsim00.psi.ch'
 alias 'gow=ssh -YCA iff@yvesineichen.com'
 
 # mpicxx wrappers
-alias 'mpicxx-clang=OMPI_CXX=g++ mpicxx'
+alias 'mpicxx-clang=OMPI_CXX=clang++ mpicxx'
 alias 'mpicxx-gcc=OMPI_CXX=g++ mpicxx'
