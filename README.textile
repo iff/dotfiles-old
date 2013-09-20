@@ -21,7 +21,7 @@ h2. Installation
 
 Clone the repository and link files into home. Run
 
-bc.. git submodule init
+bc. git submodule init
 git submodule update
 
 
