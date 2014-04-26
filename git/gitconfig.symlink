@@ -12,11 +12,11 @@
     ui = true
     diff = auto
 
-[merge]
-    tool = splice
-
 [rerere]
     enabled = 1
+
+[merge]
+    tool = threesome
 
 [mergetool "splice"]
     cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
@@ -64,11 +64,6 @@
     # this one is a MUST have
     ls-ign  = ls-files --exclude-standard -o -i
 
-    ka      = !gitk --all
-    kdo     = !gitk --date-order
-    kado    = !gitk --all --date-order
-    kasd    = !gitk --all --simplify-by-decoration
-
     # checkpoint and checkpoint recover
     cp      = !git stash save $(date +%F--%T) && git stash pop --index
     cpr     = "!f() { git fsck | grep commit | cut -d' ' -f3 | while read hash; do git rev-parse --verify --no-revs --quiet $hash^2 2>/dev/null && echo $hash | xargs git rev-list --since=${1:-1day} -1; done | xargs -i git log --graph --oneline --format='%Cblue%h %Cgreen(%ar) %Creset%s' -3 '{}'; }; f"
@@ -81,3 +76,10 @@
 
     locate = !sh -c 'git ls-files "\\*$1"' -
 
+    # increasing efficiency of merges
+    edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; vim `f`"
+    add-unmerged  = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
+
+    # fixup
+    fu  = commit --amend --reset-author -C HEAD
+    fuu = !git add -u && git fu
