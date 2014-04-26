@@ -1,88 +1,46 @@
 unbind C-b
 set -g prefix `
 
-# send the prefix to client inside window (ala nested sessions)
-bind-key a send-prefix
+# Set term color properly
+set -g default-terminal "screen-256color"
 
-# Allows faster key repetition
-set -s escape-time 0
+# set status bar to utf8
+set -g status-utf8 on
 
-# toggle last window like screen
-bind-key C-a last-window
+# Solarized Dark
+set -g status-bg black
+set -g status-fg blue
+set-window-option -g window-status-current-fg white
+
+# Solarized Light
+# set -g status-bg white
+# set -g status-fg brightyellow
+# set-window-option -g window-status-current-fg black
+
+# hostname color
+set -g status-left '#[fg=green]#H'
+
+# right status and color
+set -g status-right '#[fg=yellow]%A %v %l:%M %p'
 
 # confirm before killing a window or the server
 bind-key k confirm kill-window
 bind-key K confirm kill-server
 
-# ctrl+left/right cycles thru windows
-bind-key -n C-right next
-bind-key -n C-left prev
-
-# open a man page in new window
-bind / command-prompt "split-window 'exec man %%'"
-
-# quick view of processes
-bind '~' split-window "exec htop"
-
 # scrollback buffer n lines
 set -g history-limit 5000
 
-# listen for activity on all windows
-set -g bell-action any
+# quick make
+bind '~' command-prompt "split-window -h 'cd %%; exec make | vim -'"
 
-# on-screen time for display-panes in ms
-set -g display-panes-time 2000
+# Fix tmux copy bug
+#set-option -g default-command "reattach-to-user-namespace -l $(basename $SHELL)"
 
-# start window indexing at one instead of zero
-set -g base-index 1
+# Reload the file with Prefix r.
+bind r source-file ~/.tmux.conf
 
-# enable wm window titles
-set -g set-titles on
+# Load local configuration
+source-file ~/.tmux.conf.local
 
-# wm window title string (uses statusbar variables)
-set -g set-titles-string "tmux.#I.#W"
-
-# 256 colors
-set -g default-terminal "screen-256color"
-
-# Rather than constraining window size to the maximum size of any client
-# connected to the *session*, constrain window size to the maximum size of any
-# client connected to *that window*. Much more reasonable.
-setw -g aggressive-resize on
-
-# statusbar --------------------------------------------------------------
-
-set -g display-time 2000
-
-# default statusbar colors
-set -g status-fg white
-set -g status-bg default
-set -g status-attr default
-
-# default window title colors
-set-window-option -g window-status-fg colour166
-set-window-option -g window-status-bg default
-set-window-option -g window-status-attr dim
-
-# active window title colors
-set-window-option -g window-status-current-fg white
-set-window-option -g window-status-current-bg default
-set-window-option -g window-status-current-attr bright
-
-# command/message line colors
-set -g message-fg white
-set -g message-bg black
-set -g message-attr bright
-
-# center align the window list
-set -g status-justify centre
-
-# show some useful stats but only when tmux is started
-# outside of Xorg, otherwise dwm statusbar shows these already
-set -g status-right ""
-set -g status-left ""
-if '[ -z "$DISPLAY" ]' 'set -g status-left "[#[fg=green] #H #[default]]"'
-if '[ -z "$DISPLAY" ]' 'set -g status-right "[ #[fg=red]#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)#[default] ][ #[fg=white,bright]%a %Y-%m-%d %H:%M #[default]]"'
-if '[ -z "$DISPLAY" ]' 'set -g status-right-length 50'
-if '[ -z "$DISPLAY" ]' 'set -g status-left-length 15'
-
+# Load "vim-ish" configuration
+source-file ~/.tmux.conf.vim
